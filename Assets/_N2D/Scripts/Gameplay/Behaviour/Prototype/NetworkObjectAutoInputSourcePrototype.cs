@@ -10,6 +10,8 @@ namespace StinkySteak.N2D.Gameplay.Behaviour
     {
         public override void NetworkStart()
         {
+            if (!IsServer) return;
+
             Object.InputSource = Sandbox.LocalPlayer;
         }
     }
