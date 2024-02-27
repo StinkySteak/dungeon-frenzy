@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 421680662}
   - component: {fileID: 421680661}
   - component: {fileID: 421680660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,18 +489,6 @@ PrefabInstance:
     - target: {fileID: 462263736606742649, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
-      propertyPath: SceneId
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
-      propertyPath: _PrefabId
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 344204440
       objectReference: {fileID: 0}
     - target: {fileID: 462263736606742655, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
       propertyPath: m_Name
