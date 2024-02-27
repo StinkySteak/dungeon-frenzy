@@ -15,58 +15,37 @@ MonoBehaviour:
   Assemblies:
   - Assembly-CSharp.dll
   _Prefabs:
-  - Obj: {fileID: 6276855212308729943, guid: 84bdaf9c034444f408cc66234ee3344d, type: 3}
-    InstanceId: 25174
-    Name: Bomb
-    FileName: Assets/Netick/Samples/Bomberman/Network Prefabs/Bomb.prefab
-    GO: {fileID: 8886278785656527844, guid: 84bdaf9c034444f408cc66234ee3344d, type: 3}
+  - Obj: {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
+    InstanceId: 23850
+    Name: Player
+    FileName: Assets/_N2D/Prefabs/Gameplay/Player/Character/Player.prefab
+    GO: {fileID: 462263736606742655, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
     Id: 0
-  - Obj: {fileID: 8143126971102408644, guid: 98e433893a4b70f41a8ab2145afe3e07, type: 3}
-    InstanceId: 25178
-    Name: Bomberman Player
-    FileName: Assets/Netick/Samples/Bomberman/Network Prefabs/Bomberman Player.prefab
-    GO: {fileID: 2511112182317059464, guid: 98e433893a4b70f41a8ab2145afe3e07, type: 3}
-    Id: 1
-  - Obj: {fileID: 4469672062832013922, guid: 8e254087cbaecc049ac87981c263d46c, type: 3}
-    InstanceId: 25182
-    Name: DestroyableBlock
-    FileName: Assets/Netick/Samples/Bomberman/Network Prefabs/DestroyableBlock.prefab
-    GO: {fileID: 9137365252298567970, guid: 8e254087cbaecc049ac87981c263d46c, type: 3}
-    Id: 2
-  - Obj: {fileID: 9177126579482737267, guid: 09a0cccbd8f361641bd963785a4b016c, type: 3}
-    InstanceId: 25186
-    Name: Power Up
-    FileName: Assets/Netick/Samples/Bomberman/Network Prefabs/Power Up.prefab
-    GO: {fileID: 3064325587269614628, guid: 09a0cccbd8f361641bd963785a4b016c, type: 3}
-    Id: 3
-  - Obj: {fileID: 5100633453439203130, guid: d66d5a97430d3364890108321123b309, type: 3}
-    InstanceId: 25190
-    Name: FPS Player
-    FileName: Assets/Netick/Samples/First Person Shooter/Network Prefabs/FPS Player.prefab
-    GO: {fileID: 7011933354638177272, guid: d66d5a97430d3364890108321123b309, type: 3}
-    Id: 4
-  Replication: 1
   TickRate: 33.333336
   MaxPlayers: 16
   MaxObjects: 512
   MaxSendableDataSize: 50000
-  AllocatorBlockSize: 65536
+  AllocatorStateBlockSize: 131072
+  AllocatorMetaBlockSize: 1048576
   ReceiveBufferSize: 32768
   SendBufferSize: 16384
   Timeout: 10
-  MaxPredicatedTicks: 64
+  MaxPredictedTicks: 64
   ServerDivisor: 1
   ClientDivisor: 1
   PredictedClientPhysics: 0
-  PhysicsType: 1
+  PhysicsType: 2
   InvokeRenderInHeadless: 1
   RenderInvokeOrder: 1
   EnableLogging: 1
   SimServerLoss: 0
   SimClientLoss: 0
   EnableLagCompensation: 0
-  AoI: 0
+  EnableInterestManagement: 0
+  InterestGroupCount: 2
+  SimulationCulling: 0
   CellSize: 450
-  WorldSize: 8000
+  WorldSize: {x: 8000, y: 1, z: 8000}
+  RenderWorldGrid: 0
   UseSceneSwitchThread: 1
   LagCompensationDebug: 1
