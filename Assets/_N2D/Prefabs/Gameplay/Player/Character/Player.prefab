@@ -129,7 +129,7 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 462263736606742650}
   _moveSpeed: 5
   _jumpForce: 7
-  _isGrounded: 0
+  <_isGrounded>k__BackingField: 0
   _groundChecker: {fileID: 562513142}
   _groundLayer:
     serializedVersion: 2

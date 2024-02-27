@@ -1,4 +1,5 @@
 using Netick.Unity;
+using Netick;
 using StinkySteak.N2D.Gameplay.PlayerInput;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Movement
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpForce;
-        [SerializeField] private bool _isGrounded;
+        [Networked] private bool _isGrounded { get; set; }
         [SerializeField] private Transform _groundChecker;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _groundCheckOverlapRadius = 0.1f;
