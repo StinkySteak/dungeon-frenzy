@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.stinkysteak.netick-timer": {
+      "version": "https://github.com/StinkySteak/netick-ticktimer.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3c938e43ec34f0a9fa9e2d5cd091bb47fe6e54a6"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.9",
       "depth": 1,
