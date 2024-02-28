@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5922d4a2e010aac4cb20e7dcf04236f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SandboxPrefab: {fileID: 0}
+  SandboxPrefab: {fileID: 8094708547346200016, guid: cd7936606f45c904ebc1ad52c7e83ed5, type: 3}
   Transport: {fileID: 11400000, guid: 45d8249dfdf511d429f92c6a4a4e26f4, type: 2}
   Mode: 2
   Clients: 5

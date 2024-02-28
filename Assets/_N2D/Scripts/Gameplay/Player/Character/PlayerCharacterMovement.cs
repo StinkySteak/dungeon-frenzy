@@ -3,7 +3,7 @@ using Netick;
 using StinkySteak.N2D.Gameplay.PlayerInput;
 using UnityEngine;
 
-namespace StinkySteak.N2D.Gameplay.Player.Movement
+namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
 {
     public class PlayerCharacterMovement : NetworkBehaviour
     {
