@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: -187163571796443866}
   - component: {fileID: 8071094478288072566}
   - component: {fileID: -6556676977484241252}
+  - component: {fileID: 3541287404522835111}
+  - component: {fileID: 6290587020520711107}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -168,7 +170,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireRate: 0.1
-  <_degree>k__BackingField: 0
+  _distance: 100
+  _weaponOriginPointOffset: 1.5
+  _hitableLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  <Degree>k__BackingField: 0
 --- !u!114 &8071094478288072566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +191,7 @@ MonoBehaviour:
   _weapon: {fileID: -187163571796443866}
   _weaponVisual: {fileID: 7993130619245119027}
   _weaponRenderer: {fileID: 7694794156645874762}
+  _bulletVfxPrefab: {fileID: 6890065909177111855, guid: f395ff23a8403be45a928f05df7f4137, type: 3}
 --- !u!114 &-6556676977484241252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +204,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925367ef763a23c42ac38f55726fee8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3541287404522835111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462263736606742655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0a28ce96a7c6a43ac1d33070dc6dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <_damagedCount>k__BackingField: 0
+--- !u!114 &6290587020520711107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462263736606742655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ebb02a76e915b488f19ef651235ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 3541287404522835111}
+  _renderer: {fileID: 462263737325219084}
+  _materialDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  _materialOnHit: {fileID: 2100000, guid: 781b6b37dca04a241a63eca26796b228, type: 2}
+  _materialOnHitLifetime: 0.2
 --- !u!1 &462263736857771813
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 462263736857771810}
   - component: {fileID: 462263736857771811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

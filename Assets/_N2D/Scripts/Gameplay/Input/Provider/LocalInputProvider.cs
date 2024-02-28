@@ -28,6 +28,7 @@ namespace StinkySteak.N2D.Gameplay.PlayerInput
             input.Jump = Input.GetKey(KeyCode.Space);
             input.HorizontalMove = Input.GetAxis("Horizontal");
             input.LookDegree = GetLookDegree();
+            input.IsFiring = Input.GetKey(KeyCode.Mouse0);
 
             sandbox.SetInput(input);
         }

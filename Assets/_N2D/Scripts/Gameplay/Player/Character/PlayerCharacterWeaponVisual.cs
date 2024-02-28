@@ -1,5 +1,7 @@
 using Netick;
 using Netick.Unity;
+using StinkySteak.N2D.Gameplay.Bullet.Dataset;
+using StinkySteak.N2D.Gameplay.Bullet.VFX;
 using UnityEngine;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
@@ -9,6 +11,23 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         [SerializeField] private PlayerCharacterWeapon _weapon;
         [SerializeField] private Transform _weaponVisual;
         [SerializeField] private SpriteRenderer _weaponRenderer;
+        [SerializeField] private BulletTravelVFX _bulletVfxPrefab;
+
+        public override void NetworkStart()
+        {
+            _weapon.OnLastProjectileHitChanged += OnLastProjectileHitChanged;
+        }
+
+        private void OnLastProjectileHitChanged()
+        {
+            ProjectileHit lastProjectileHit = _weapon.LastProjectileHit;
+            Vector2 originPossition = lastProjectileHit.OriginPosition;
+            Vector2 hitPosition = lastProjectileHit.HitPosition;
+            Vector2 bulletDirection = (hitPosition - originPossition).normalized;
+
+            BulletTravelVFX bullet = Instantiate(_bulletVfxPrefab, originPossition, Quaternion.identity);
+            bullet.Initialize(Sandbox, hitPosition, bulletDirection);
+        }
 
         public override void NetworkRender()
         {
