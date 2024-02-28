@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 462263736606742652}
   - component: {fileID: 462263736606742650}
   - component: {fileID: 462263736606742653}
-  - component: {fileID: 462263736606742647}
+  - component: {fileID: 4467566168798759716}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MonoBehaviour:
   Children: []
   PrefabIndex: -1
   Persistent: 0
-  _predictionMode: 0
+  _predictionMode: 1
 --- !u!50 &462263736606742650
 Rigidbody2D:
   serializedVersion: 4
@@ -134,7 +134,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _groundCheckOverlapRadius: 0.1
---- !u!114 &462263736606742647
+--- !u!114 &4467566168798759716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 462263736606742655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 682374318, guid: da78c2c9df60edc4fb5f65b59fa57c41, type: 3}
+  m_Script: {fileID: 1174502179, guid: da78c2c9df60edc4fb5f65b59fa57c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   RenderTransform: {fileID: 462263737325219087}
