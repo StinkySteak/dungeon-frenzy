@@ -21,7 +21,7 @@ MonoBehaviour:
     FileName: Assets/_N2D/Prefabs/Gameplay/Player/Character/Player.prefab
     GO: {fileID: 462263736606742655, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
     Id: 0
-  TickRate: 33.333336
+  TickRate: 30
   MaxPlayers: 16
   MaxObjects: 512
   MaxSendableDataSize: 50000
@@ -33,7 +33,7 @@ MonoBehaviour:
   MaxPredictedTicks: 64
   ServerDivisor: 1
   ClientDivisor: 1
-  PredictedClientPhysics: 0
+  PredictedClientPhysics: 1
   PhysicsType: 2
   InvokeRenderInHeadless: 1
   RenderInvokeOrder: 1
