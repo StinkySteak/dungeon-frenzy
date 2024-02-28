@@ -8,15 +8,13 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
     public class PlayerCharacterWeapon : NetworkBehaviour
     {
         [SerializeField] private float _fireRate;
-        [Networked][Smooth] private float _degree { get; set; }
-
-        public float Degree => _degree;
+        [Networked][Smooth(false)] public float Degree { get; private set; }
 
         public override void NetworkFixedUpdate()
         {
             if (FetchInput(out PlayerCharacterInput input))
             {
-                _degree = input.LookDegree;
+                Degree = input.LookDegree;
             }
         }
     }
