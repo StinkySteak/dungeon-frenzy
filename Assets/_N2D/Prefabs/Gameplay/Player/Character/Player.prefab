@@ -176,7 +176,7 @@ MonoBehaviour:
   _weaponOriginPointOffset: 1.5
   _hitableLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   _ammoReplenishDelay: 1.5
   _ammoReplenishSpeed: 15
   _maxAmmo: 20
