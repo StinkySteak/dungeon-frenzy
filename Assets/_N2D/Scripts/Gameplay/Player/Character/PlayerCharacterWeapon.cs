@@ -130,7 +130,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             _lastProjectileHit = new ProjectileHit()
             {
                 Tick = Sandbox.Tick.TickValue,
-                HitPosition = hit.transform.position,
+                HitPosition = hit.point,
                 OriginPosition = originPoint,
             };
         }
