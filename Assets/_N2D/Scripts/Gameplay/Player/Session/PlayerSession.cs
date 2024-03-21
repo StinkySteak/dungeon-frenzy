@@ -1,6 +1,5 @@
 using Netick.Unity;
 using Netick;
-using UnityEngine;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer;
 
@@ -11,6 +10,8 @@ namespace StinkySteak.N2D.Gameplay.Player.Session
         [Networked] private NetworkString32 _nickname { get; set; }
         [Networked] private int _kill { get; set; }
         [Networked] private int _death { get; set; }
+
+        public NetworkString32 Nickname => _nickname;
 
         public void AddKill()
             => _kill++;

@@ -7,11 +7,17 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health
     public class PlayerCharacterHealth : NetworkBehaviour
     {
         [Networked] private int _health { get; set; }
+        public const int MAX_HEALTH = 100;
 
         public event Action OnHealthChanged;
         public event Action OnHealthReduced;
 
         public int Health => _health;
+
+        public override void NetworkStart()
+        {
+            _health = MAX_HEALTH;
+        }
 
         public void ReduceHealth(int amount)
         {
