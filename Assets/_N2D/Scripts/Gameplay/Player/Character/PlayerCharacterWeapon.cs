@@ -5,6 +5,7 @@ using StinkySteak.N2D.Gameplay.PlayerInput;
 using StinkySteak.N2D.Gameplay.Player.Character.Health;
 using System;
 using StinkySteak.N2D.Gameplay.Bullet.Dataset;
+using StinkySteak.Netick.Timer;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 {
@@ -17,6 +18,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
         [Networked][Smooth(false)] public float Degree { get; private set; }
         [Networked] private ProjectileHit _lastProjectileHit { get; set; }
+        [Networked] private TickTimer _timerFireRate { get; set; }
 
         public ProjectileHit LastProjectileHit => _lastProjectileHit;
 
@@ -35,6 +37,12 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             Degree = input.LookDegree;
 
             if (!input.IsFiring) return;
+
+            if (!_timerFireRate.IsExpiredOrNotRunning(Sandbox)) return;
+
+            if (!IsServer) return;
+
+            _timerFireRate = TickTimer.CreateFromSeconds(Sandbox, _fireRate);
 
             Vector2 direction = DegreesToDirection(Degree);
 

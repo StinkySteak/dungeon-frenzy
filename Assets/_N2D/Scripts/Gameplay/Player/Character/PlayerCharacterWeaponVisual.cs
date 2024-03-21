@@ -3,6 +3,7 @@ using Netick.Unity;
 using StinkySteak.N2D.Gameplay.Bullet.Dataset;
 using StinkySteak.N2D.Gameplay.Bullet.VFX;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 {
@@ -27,6 +28,9 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             BulletTravelVFX bullet = Instantiate(_bulletVfxPrefab, originPossition, Quaternion.identity);
             bullet.Initialize(Sandbox, hitPosition, bulletDirection);
+            
+            //TODO: Temporary multipeer compatibility
+            SceneManager.MoveGameObjectToScene(bullet.gameObject, Sandbox.Scene);
         }
 
         public override void NetworkRender()
