@@ -177,7 +177,11 @@ MonoBehaviour:
   _hitableLayer:
     serializedVersion: 2
     m_Bits: 128
+  _ammoReplenishDelay: 1.5
+  _ammoReplenishSpeed: 15
+  _maxAmmo: 20
   <Degree>k__BackingField: 0
+  <_ammo>k__BackingField: 0
 --- !u!114 &8071094478288072566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textNametag: {fileID: 5328359814833325024}
   _health: {fileID: 3541287404522835111}
+  _weapon: {fileID: -187163571796443866}
   _healthbar: {fileID: 508160093412112954}
   _ammobar: {fileID: 3451981288234977910}
 --- !u!1 &462263736857771813

@@ -1,5 +1,6 @@
 using Netick.Unity;
 using StinkySteak.N2D.Gameplay.Player.Character.Health;
+using StinkySteak.N2D.Gameplay.Player.Character.Weapon;
 using StinkySteak.N2D.Gameplay.Player.Session;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using TMPro;
@@ -13,12 +14,14 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.UI
         [SerializeField] private TMP_Text _textNametag;
 
         [SerializeField] private PlayerCharacterHealth _health;
+        [SerializeField] private PlayerCharacterWeapon _weapon;
         [SerializeField] private Slider _healthbar;
         [SerializeField] private Slider _ammobar;
 
         public override void NetworkStart()
         {
             _health.OnHealthChanged += OnHealthChanged;
+            _weapon.OnAmmoChanged += OnAmmoChanged;
 
             GlobalPlayerManager globalPlayerManager = Sandbox.GetComponent<GlobalPlayerManager>();
 
@@ -26,6 +29,12 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.UI
             {
                 _textNametag.SetText(session.Nickname);
             }
+        }
+
+        private void OnAmmoChanged()
+        {
+            _ammobar.maxValue = _weapon.MaxAmmo;
+            _ammobar.value = _weapon.Ammo;
         }
 
         private void OnHealthChanged()
