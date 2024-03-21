@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireRate: 0.1
+  _damage: 0
   _distance: 100
   _weaponOriginPointOffset: 1.5
   _hitableLayer:
@@ -216,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0a28ce96a7c6a43ac1d33070dc6dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_damagedCount>k__BackingField: 0
+  <_health>k__BackingField: 0
 --- !u!114 &6290587020520711107
 MonoBehaviour:
   m_ObjectHideFlags: 0

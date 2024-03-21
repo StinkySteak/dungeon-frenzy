@@ -6,17 +6,35 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health
 {
     public class PlayerCharacterHealth : NetworkBehaviour
     {
-        [Networked] private int _damagedCount { get; set; }
+        [Networked] private int _health { get; set; }
 
-        public event Action OnDamaged;
+        public event Action OnHealthChanged;
+        public event Action OnHealthReduced;
 
-        public void TriggerDamage()
-            => _damagedCount++;
+        public int Health => _health;
 
-        [OnChanged(nameof(_damagedCount))]
-        private void OnDamagedCountChanged(OnChangedData onChangedData)
+        public void ReduceHealth(int amount)
         {
-            OnDamaged?.Invoke();
+            _health -= amount;
+
+            if (_health <= 0)
+            {
+                Sandbox.Destroy(Object);
+            }
+        }
+
+        [OnChanged(nameof(_health))]
+        private void OnChangedHealth(OnChangedData onChangedData)
+        {
+            OnHealthChanged?.Invoke();
+
+            int previousHealth = onChangedData.GetPreviousValue<int>();
+            int currentHealth = _health;
+
+            if (currentHealth < previousHealth)
+            {
+                OnHealthReduced?.Invoke();
+            }
         }
     }
 }

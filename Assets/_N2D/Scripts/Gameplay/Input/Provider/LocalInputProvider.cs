@@ -13,7 +13,7 @@ namespace StinkySteak.N2D.Gameplay.PlayerInput
         {
             if (sandbox.TryGetComponent(out LocalPlayerManager localPlayerManager))
             {
-                localPlayerManager.OnLocalPlayerSpawned += OnLocalPlayerSpawned;
+                localPlayerManager.OnCharacterSpawned += OnLocalPlayerSpawned;
             }
         }
 

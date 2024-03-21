@@ -12,6 +12,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
     public class PlayerCharacterWeapon : NetworkBehaviour
     {
         [SerializeField] private float _fireRate;
+        [SerializeField] private int _damage;
         [SerializeField] private float _distance;
         [SerializeField] private float _weaponOriginPointOffset = 1.5f;
         [SerializeField] private LayerMask _hitableLayer;
@@ -65,7 +66,14 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             if (hit.transform.TryGetComponent(out PlayerCharacterHealth playerCharacterHealth))
             {
-                playerCharacterHealth.TriggerDamage();
+                bool willDie = playerCharacterHealth.Health - _damage <= 0;
+
+                playerCharacterHealth.ReduceHealth(_damage);
+
+                if (willDie)
+                {
+
+                }
             }
 
             _lastProjectileHit = new ProjectileHit()

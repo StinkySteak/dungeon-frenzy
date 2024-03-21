@@ -18,7 +18,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health.Visual
 
         public override void NetworkStart()
         {
-            _health.OnDamaged += OnDamaged;
+            _health.OnHealthChanged += OnDamaged;
         }
 
         public override void NetworkRender()
