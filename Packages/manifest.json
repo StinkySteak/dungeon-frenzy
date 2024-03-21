@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.stinkysteak.netick-timer": "https://github.com/StinkySteak/netick-ticktimer.git",
+    "com.unity.cinemachine": "2.8.9",
     "com.unity.feature.2d": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.17",
     "com.unity.nuget.mono-cecil": "1.11.4",
