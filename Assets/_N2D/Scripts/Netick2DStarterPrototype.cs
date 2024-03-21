@@ -1,8 +1,11 @@
 using Netick;
 using Netick.Unity;
+using StinkySteak.N2D.Finder;
 using StinkySteak.N2D.Gameplay.Player.Character;
 using StinkySteak.N2D.Gameplay.Player.Session;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
+using StinkySteak.N2D.Netick;
+using System.Collections.Generic;
 using UnityEngine;
 using NetworkPlayer = Netick.NetworkPlayer;
 
@@ -15,6 +18,11 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
         public override void OnSceneLoaded(NetworkSandbox sandbox)
         {
+            List<INetickSceneLoaded> listeners = ObjectFinder.FindPreAlloc<INetickSceneLoaded>();
+
+            foreach (INetickSceneLoaded listener in listeners)
+                listener.OnSceneLoaded(sandbox);
+
             if (!sandbox.IsServer) return;
 
             sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, Vector3.zero, Quaternion.identity, sandbox.LocalPlayer);
