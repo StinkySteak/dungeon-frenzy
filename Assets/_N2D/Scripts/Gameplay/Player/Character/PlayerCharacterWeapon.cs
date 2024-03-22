@@ -102,7 +102,6 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             Vector2 originPoint = GetWeaponOriginPoint(direction);
 
             RaycastHit2D hit = Physics2D.Raycast(originPoint, direction, _distance, _hitableLayer);
-
             _timerAmmoReplenish = TickTimer.CreateFromSeconds(Sandbox, _ammoReplenishDelay);
             _ammo--;
 
@@ -126,14 +125,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             {
                 isHitPlayer = true;
 
-                bool willDie = playerCharacterHealth.Health - _damage <= 0;
-
                 playerCharacterHealth.ReduceHealth(_damage);
-
-                if (willDie)
-                {
-
-                }
             }
 
             _lastProjectileHit = new ProjectileHit()
