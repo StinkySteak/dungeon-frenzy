@@ -81,6 +81,14 @@ namespace StinkySteak.N2D.Gameplay.PlayerManager.Global
             _playerCharacters.Add(playerId, playerCharacter);
         }
 
+        public void RemovePlayerCharacter(int playerId)
+        {
+            if (!IsCharacterExist(playerId)) return;
+
+            _playerCharacters.Remove(playerId);
+        }
+
+
         public bool IsSessionExist(int playerId)
             => _playerSessions.ContainsKey(playerId);
 

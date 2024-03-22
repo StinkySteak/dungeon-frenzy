@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8094708547346200018}
   - component: {fileID: 8094708547346200017}
   - component: {fileID: -6781965846977073344}
+  - component: {fileID: -960902581722611822}
   m_Layer: 0
   m_Name: N2DNetworkSandbox
   m_TagString: Untagged
@@ -70,3 +71,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fd77a7791a8bb46b5455af2b271095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-960902581722611822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8094708547346200016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4856e807aa3b4e4d96b21376c8b6d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSessionPrefab: {fileID: 68535350912409233, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
+  _playerCharacterPrefab: {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}

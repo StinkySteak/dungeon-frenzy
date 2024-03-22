@@ -2,6 +2,7 @@ using Netick.Unity;
 using Netick;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer;
+using StinkySteak.N2D.Launcher.Prototype;
 
 namespace StinkySteak.N2D.Gameplay.Player.Session
 {
@@ -18,6 +19,13 @@ namespace StinkySteak.N2D.Gameplay.Player.Session
 
         public void AddDeath()
             => _death++;
+
+
+        [Rpc(RpcPeers.InputSource, RpcPeers.Owner, true)]
+        public void RPC_Respawn()
+        {
+            Sandbox.GetComponent<MatchManager>().SpawnPlayerCharacter(InputSource);
+        }
 
 
         [Rpc(RpcPeers.InputSource, RpcPeers.Owner, true)]
