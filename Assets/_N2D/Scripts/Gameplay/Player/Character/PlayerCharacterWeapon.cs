@@ -48,6 +48,11 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         [OnChanged(nameof(_lastProjectileHit))]
         private void OnChanged(OnChangedData onChangedData)
         {
+            ProjectileHit old = onChangedData.GetPreviousValue<ProjectileHit>();
+            ProjectileHit current = _lastProjectileHit;
+
+            if (old.Tick == current.Tick) return;
+
             OnLastProjectileHitChanged?.Invoke();
         }
 
