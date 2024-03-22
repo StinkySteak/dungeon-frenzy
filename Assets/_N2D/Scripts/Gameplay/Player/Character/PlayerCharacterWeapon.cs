@@ -6,7 +6,6 @@ using StinkySteak.N2D.Gameplay.Player.Character.Health;
 using System;
 using StinkySteak.N2D.Gameplay.Bullet.Dataset;
 using StinkySteak.Netick.Timer;
-using UnityEngine.Windows;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 {
@@ -111,12 +110,17 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
                     Tick = Sandbox.Tick.TickValue,
                     HitPosition = fakeHitPosition,
                     OriginPosition = originPoint,
+                    IsHitPlayer = false,
                 };
                 return;
             }
 
+            bool isHitPlayer = false;
+
             if (hit.transform.TryGetComponent(out PlayerCharacterHealth playerCharacterHealth))
             {
+                isHitPlayer = true;
+
                 bool willDie = playerCharacterHealth.Health - _damage <= 0;
 
                 playerCharacterHealth.ReduceHealth(_damage);
@@ -132,6 +136,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
                 Tick = Sandbox.Tick.TickValue,
                 HitPosition = hit.point,
                 OriginPosition = originPoint,
+                IsHitPlayer = isHitPlayer,
             };
         }
 
