@@ -252,7 +252,7 @@ MonoBehaviour:
   StartServerInMultiplePeersMode: 1
   AutoStart: 0
   AutoConnect: 0
-  Port: 5206
+  Port: 25565
   ServerIPAddress: 127.0.0.1
 --- !u!4 &1007618482
 Transform:
