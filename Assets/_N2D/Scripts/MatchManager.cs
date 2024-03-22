@@ -4,6 +4,7 @@ using StinkySteak.N2D.Finder;
 using StinkySteak.N2D.Gameplay.Player.Character;
 using StinkySteak.N2D.Gameplay.Player.Session;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
+using StinkySteak.N2D.Gameplay.Spawnpoints;
 using StinkySteak.N2D.Netick;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace StinkySteak.N2D.Launcher.Prototype
     {
         [SerializeField] private NetworkObject _playerSessionPrefab;
         [SerializeField] private NetworkObject _playerCharacterPrefab;
+        private SpawnPoints _spawnpoints;
 
         public override void OnSceneLoaded(NetworkSandbox sandbox)
         {
@@ -24,6 +26,8 @@ namespace StinkySteak.N2D.Launcher.Prototype
                 listener.OnSceneLoaded(sandbox);
 
             if (!sandbox.IsServer) return;
+
+            _spawnpoints = FindObjectOfType<SpawnPoints>();
 
             sandbox.NetworkInstantiate(_playerSessionPrefab.gameObject, Vector3.zero, Quaternion.identity, sandbox.LocalPlayer);
             SpawnPlayerCharacter(sandbox.LocalPlayer);
@@ -35,7 +39,9 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
             if (isPlayerExist) return;
 
-            Sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, Vector3.zero, Quaternion.identity, player);
+            Vector3 nextPosition = _spawnpoints.GetNext().position;
+
+            Sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, nextPosition, Quaternion.identity, player);
         }
 
         public override void OnClientConnected(NetworkSandbox sandbox, NetworkConnection client)
