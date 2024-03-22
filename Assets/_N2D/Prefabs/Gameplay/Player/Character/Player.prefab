@@ -240,6 +240,7 @@ MonoBehaviour:
   _materialDefault: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   _materialOnHit: {fileID: 2100000, guid: 781b6b37dca04a241a63eca26796b228, type: 2}
   _materialOnHitLifetime: 0.2
+  _vfxBloodPrefab: {fileID: 7311190397742819428, guid: edc41a59079b97d4d9b628cf09749713, type: 3}
 --- !u!114 &5794989081546542482
 MonoBehaviour:
   m_ObjectHideFlags: 0
