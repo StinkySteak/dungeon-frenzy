@@ -10,18 +10,10 @@ namespace StinkySteak.N2D.Gameplay.Player.Session
     public class PlayerSession : NetworkBehaviour
     {
         [Networked] private NetworkString32 _nickname { get; set; }
-        [Networked] private int _kill { get; set; }
-        [Networked] private int _death { get; set; }
 
         public NetworkString32 Nickname => _nickname;
 
         public event Action OnNicknameChanged;
-
-        public void AddKill()
-            => _kill++;
-
-        public void AddDeath()
-            => _death++;
 
         [OnChanged(nameof(_nickname))]
         private void OnChangedNickname(OnChangedData onChangedData)
