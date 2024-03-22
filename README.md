@@ -25,3 +25,6 @@ The sample presents whether Netick is capable to create a fast action online 2D 
 - Double Jump
 - Fast paced
 - Weapon Heat system
+
+#### Credits
+- Dungeon Platformer Tile Set (https://incolgames.itch.io/dungeon-platformer-tile-set-pixel-art?download)
