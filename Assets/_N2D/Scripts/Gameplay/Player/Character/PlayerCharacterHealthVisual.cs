@@ -14,6 +14,8 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health.Visual
         [SerializeField] private Material _materialOnHit;
         [SerializeField] private float _materialOnHitLifetime = 0.2f;
 
+        [SerializeField] private GameObject _vfxBloodPrefab;
+
         private AuthTickTimer _timerMaterialOnHitLifetime;
 
         public override void NetworkStart()
@@ -32,6 +34,8 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health.Visual
 
         private void OnDamaged()
         {
+            Sandbox.Instantiate(_vfxBloodPrefab, transform.position, Quaternion.identity);
+
             _renderer.material = _materialOnHit;
             _timerMaterialOnHitLifetime = AuthTickTimer.CreateFromSeconds(Sandbox, _materialOnHitLifetime);
         }

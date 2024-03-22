@@ -21,6 +21,12 @@ MonoBehaviour:
     FileName: Assets/_N2D/Prefabs/Gameplay/Player/Character/Player.prefab
     GO: {fileID: 462263736606742655, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
     Id: 0
+  - Obj: {fileID: 68535350912409233, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
+    InstanceId: 19868
+    Name: PlayerSession
+    FileName: Assets/_N2D/Prefabs/Gameplay/Player/Session/PlayerSession.prefab
+    GO: {fileID: 68535350912409235, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
+    Id: 1
   TickRate: 30
   MaxPlayers: 16
   MaxObjects: 512

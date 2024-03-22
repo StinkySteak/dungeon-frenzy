@@ -9,15 +9,19 @@ namespace StinkySteak.N2D.Gameplay.Bullet.VFX
         [SerializeField] private float _distanceToDestroy = 2f;
         [SerializeField] private float _bulletSpeed = 2f;
         [SerializeField] private float _lifetime = 2f;
+        [SerializeField] private GameObject _bulletImpactVFX;
+
         private Vector2 _targetPosition;
         private Vector2 _bulletDirection;
         private TickTimer _timerLifetime;
+        private bool _isHitPlayer;
 
-        public void Initialize(NetworkSandbox networkSandbox, Vector2 targetPosition, Vector2 bulletDirection)
+        public void Initialize(NetworkSandbox networkSandbox, Vector2 targetPosition, Vector2 bulletDirection, bool isHitPlayer)
         {
             networkSandbox.AttachBehaviour(this);
             _targetPosition = targetPosition;
             _bulletDirection = bulletDirection;
+            _isHitPlayer = isHitPlayer;
 
             _timerLifetime = TickTimer.CreateFromSeconds(networkSandbox, _lifetime);
         }
@@ -30,19 +34,28 @@ namespace StinkySteak.N2D.Gameplay.Bullet.VFX
 
             if (isDestinationReached)
             {
-                Sandbox.DeattachBehaviour(this);
-                Destroy(gameObject);
+                Destroy();
                 return;
             }
 
-            if(_timerLifetime.IsExpired(Sandbox))
+            if (_timerLifetime.IsExpired(Sandbox))
             {
-                Sandbox.DeattachBehaviour(this);
-                Destroy(gameObject);
+                Destroy();
                 return;
             }
 
             transform.position += (Vector3)_bulletDirection * Time.deltaTime * _bulletSpeed;
+        }
+
+        private void Destroy()
+        {
+            if (!_isHitPlayer)
+            {
+                Sandbox.Instantiate(_bulletImpactVFX, transform.position, Quaternion.identity);
+            }
+
+            Sandbox.DeattachBehaviour(this);
+            Destroy(gameObject);
         }
     }
 }
