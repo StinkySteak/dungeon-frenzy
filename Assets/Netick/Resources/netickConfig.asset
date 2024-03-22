@@ -27,8 +27,8 @@ MonoBehaviour:
     FileName: Assets/_N2D/Prefabs/Gameplay/Player/Session/PlayerSession.prefab
     GO: {fileID: 68535350912409235, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
     Id: 1
-  TickRate: 30
-  MaxPlayers: 16
+  TickRate: 45
+  MaxPlayers: 6
   MaxObjects: 512
   MaxSendableDataSize: 50000
   AllocatorStateBlockSize: 131072
