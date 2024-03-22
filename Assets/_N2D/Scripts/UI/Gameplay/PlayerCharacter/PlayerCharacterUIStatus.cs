@@ -1,3 +1,4 @@
+using Netick;
 using Netick.Unity;
 using StinkySteak.N2D.Gameplay.Player.Character.Health;
 using StinkySteak.N2D.Gameplay.Player.Character.Weapon;
@@ -17,6 +18,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.UI
         [SerializeField] private PlayerCharacterWeapon _weapon;
         [SerializeField] private Slider _healthbar;
         [SerializeField] private Slider _ammobar;
+        private PlayerSession _session;
 
         public override void NetworkStart()
         {
@@ -28,7 +30,14 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.UI
             if (globalPlayerManager.TryGetSession(Entity.InputSourcePlayerId, out PlayerSession session))
             {
                 _textNametag.SetText(session.Nickname);
+                _session = session;
+                _session.OnNicknameChanged += OnNicknameChanged;
             }
+        }
+
+        private void OnNicknameChanged()
+        {
+            _textNametag.SetText(_session.Nickname);
         }
 
         private void OnAmmoChanged()

@@ -3,6 +3,7 @@ using Netick;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer;
 using StinkySteak.N2D.Launcher.Prototype;
+using System;
 
 namespace StinkySteak.N2D.Gameplay.Player.Session
 {
@@ -14,12 +15,19 @@ namespace StinkySteak.N2D.Gameplay.Player.Session
 
         public NetworkString32 Nickname => _nickname;
 
+        public event Action OnNicknameChanged;
+
         public void AddKill()
             => _kill++;
 
         public void AddDeath()
             => _death++;
 
+        [OnChanged(nameof(_nickname))]
+        private void OnChangedNickname(OnChangedData onChangedData)
+        {
+            OnNicknameChanged?.Invoke();
+        }
 
         [Rpc(RpcPeers.InputSource, RpcPeers.Owner, true)]
         public void RPC_Respawn()
@@ -29,7 +37,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Session
 
 
         [Rpc(RpcPeers.InputSource, RpcPeers.Owner, true)]
-        private void RPC_SetNickname(NetworkString32 nickname)
+        public void RPC_SetNickname(NetworkString32 nickname)
         {
             _nickname = nickname;
         }
