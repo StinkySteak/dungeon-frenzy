@@ -11,7 +11,7 @@ using NetworkPlayer = Netick.NetworkPlayer;
 
 namespace StinkySteak.N2D.Launcher.Prototype
 {
-    public class Netick2DStarterPrototype : NetworkEventsListener
+    public class MatchManager : NetworkEventsListener
     {
         [SerializeField] private NetworkObject _playerSessionPrefab;
         [SerializeField] private NetworkObject _playerCharacterPrefab;
@@ -25,14 +25,23 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
             if (!sandbox.IsServer) return;
 
-            sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, Vector3.zero, Quaternion.identity, sandbox.LocalPlayer);
             sandbox.NetworkInstantiate(_playerSessionPrefab.gameObject, Vector3.zero, Quaternion.identity, sandbox.LocalPlayer);
+            SpawnPlayerCharacter(sandbox.LocalPlayer);
+        }
+
+        public void SpawnPlayerCharacter(NetworkPlayer player)
+        {
+            bool isPlayerExist = Sandbox.GetComponent<GlobalPlayerManager>().IsCharacterExist(player.PlayerId);
+
+            if (isPlayerExist) return;
+
+            Sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, Vector3.zero, Quaternion.identity, player);
         }
 
         public override void OnClientConnected(NetworkSandbox sandbox, NetworkConnection client)
         {
-            sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, Vector3.zero, Quaternion.identity, client);
             sandbox.NetworkInstantiate(_playerSessionPrefab.gameObject, Vector3.zero, Quaternion.identity, client);
+            SpawnPlayerCharacter(client);
         }
 
         public override void OnClientDisconnected(NetworkSandbox sandbox, NetworkConnection client, TransportDisconnectReason transportDisconnectReason)
