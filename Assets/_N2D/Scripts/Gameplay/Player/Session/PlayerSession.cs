@@ -27,12 +27,12 @@ namespace StinkySteak.N2D.Gameplay.Player.Session
             Sandbox.GetComponent<MatchManager>().SpawnPlayerCharacter(InputSource);
         }
 
+        public void SetNickname(NetworkString32 nickname)
+            => _nickname = nickname;
 
         [Rpc(RpcPeers.InputSource, RpcPeers.Owner, true)]
         public void RPC_SetNickname(NetworkString32 nickname)
-        {
-            _nickname = nickname;
-        }
+            => SetNickname(nickname);
 
         public override void NetworkStart()
         {
