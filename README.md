@@ -1,5 +1,5 @@
 
-# Project Firestorm
+# Dungeon Frenzy
 
 The sample presents whether Netick is capable to create a fast action online 2D Platformer shooter provided with full source code.
 
@@ -48,6 +48,9 @@ Lastly, change the player's circle collider layer to `Default`
 
 #### 3. Netick Config 
 Enable Lag Compensation in Netick Config
+
+#### 4. (Optional) Disable Server-auth LagComp
+The Weapon is designed for server auth only, to disable that and allowing clients to predict bullets, remove the `IsServer` check on `ProcessShooting()`
 
 ## Credits
 - Dungeon Platformer Tile Set (https://incolgames.itch.io/dungeon-platformer-tile-set-pixel-art?download)
