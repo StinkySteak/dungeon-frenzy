@@ -42,7 +42,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         private void UpdateWeaponRotationVisual()
         {
             var interpolator = _weapon.FindInterpolator(nameof(_weapon.Degree));
-            bool didGetData = interpolator.GetInterpolationData(InterpolationMode.Auto, out float from, out float to, out float alpha);
+            bool didGetData = interpolator.GetInterpolationData(InterpolationSource.Auto, out float from, out float to, out float alpha);
 
             float interpolatedDegree;
            
