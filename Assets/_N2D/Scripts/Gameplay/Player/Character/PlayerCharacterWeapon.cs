@@ -7,6 +7,10 @@ using System;
 using StinkySteak.N2D.Gameplay.Bullet.Dataset;
 using StinkySteak.Netick.Timer;
 
+#if NETICK_LAGCOMP
+using Netick.Unity.Pro;
+#endif
+
 namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 {
     public class PlayerCharacterWeapon : NetworkBehaviour
@@ -83,6 +87,38 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             Degree = input.LookDegree;
         }
 
+        public struct ShootingRaycastResult
+        {
+            public Transform HitObject;
+            public Vector3 Point;
+        }
+
+        public bool ShootUnity(Vector3 originPoint, Vector3 direction, out ShootingRaycastResult result)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(originPoint, direction, _distance, _hitableLayer);
+
+            result = new ShootingRaycastResult()
+            {
+                Point = hit.point,
+                HitObject = hit.collider.transform,
+            };
+
+            return hit;
+        }
+#if NETICK_LAGCOMP
+        public bool ShootLagComp(Vector3 originPoint, Vector3 direction, out ShootingRaycastResult result)
+        {
+            bool isHit = Sandbox.Raycast2D(originPoint, direction, out LagCompHit2D hit, InputSource, _distance, _hitableLayer);
+            
+            result = new ShootingRaycastResult()
+            {
+                Point = hit.Point,
+                HitObject = hit.GameObject.transform,
+            };
+
+            return isHit;
+        }
+#endif
         private void ProcessShooting()
         {
             if (!FetchInput(out PlayerCharacterInput input)) return;
@@ -101,11 +137,14 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             Vector2 originPoint = GetWeaponOriginPoint(direction);
 
-            RaycastHit2D hit = Physics2D.Raycast(originPoint, direction, _distance, _hitableLayer);
+            //Enable if you have LagComp (Netick Pro) otherwise use Unity default Raycast
+            //bool isHit = ShootLagComp(originPoint, direction, out ShootingRaycastResult hitResult);
+            bool isHit = ShootUnity(originPoint, direction, out ShootingRaycastResult hitResult);
+
             _timerAmmoReplenish = TickTimer.CreateFromSeconds(Sandbox, _ammoReplenishDelay);
             _ammo--;
 
-            if (!hit)
+            if (!isHit)
             {
                 Vector2 fakeHitPosition = originPoint + (direction * 1000f);
 
@@ -121,7 +160,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             bool isHitPlayer = false;
 
-            if (hit.transform.TryGetComponent(out PlayerCharacterHealth playerCharacterHealth))
+            if (TryGetComponentOrInParent(hitResult.HitObject, out PlayerCharacterHealth playerCharacterHealth))
             {
                 isHitPlayer = true;
 
@@ -131,10 +170,34 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             _lastProjectileHit = new ProjectileHit()
             {
                 Tick = Sandbox.Tick.TickValue,
-                HitPosition = hit.point,
+                HitPosition = hitResult.Point,
                 OriginPosition = originPoint,
                 IsHitPlayer = isHitPlayer,
             };
+        }
+
+        public bool TryGetComponentOrInParent<T>(Transform transform, out T component) where T : Component
+        {
+            if (transform.TryGetComponent(out T outCompA))
+            {
+                component = outCompA;
+                return true;
+            }
+
+            if (transform.parent == null)
+            {
+                component = null;
+                return false;
+            }
+
+            if (transform.parent.TryGetComponent(out T outCompB))
+            {
+                component = outCompB;
+                return true;
+            }
+
+            component = null;
+            return false;
         }
 
         private Vector2 GetWeaponOriginPoint(Vector3 direction)
