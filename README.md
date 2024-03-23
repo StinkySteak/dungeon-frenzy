@@ -43,7 +43,8 @@ bool isHit = ShootUnity(originPoint, direction, out ShootingRaycastResult hitRes
 #### 2. Adding `HitShape` Component
 Follow these Netick documentation on how to add HitShape,
 https://netick.net/docs/2/articles/lag-compensation.html
-and make sure to also change HitShapeContainer layer to `Player`
+and make sure to also change HitShapeContainer layer to `Player`.
+Lastly, change the player's circle collider layer to `Default`
 
 #### 3. Netick Config 
 Enable Lag Compensation in Netick Config
