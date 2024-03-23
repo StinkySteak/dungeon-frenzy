@@ -8,7 +8,6 @@ using StinkySteak.N2D.Gameplay.Spawnpoints;
 using StinkySteak.N2D.Netick;
 using System.Collections.Generic;
 using UnityEngine;
-using static Netick.Unity.Network;
 using NetworkPlayer = Netick.NetworkPlayer;
 
 namespace StinkySteak.N2D.Launcher.Prototype
