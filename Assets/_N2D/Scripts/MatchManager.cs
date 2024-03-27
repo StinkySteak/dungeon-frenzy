@@ -29,6 +29,9 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
             _spawnpoints = FindObjectOfType<SpawnPoints>();
 
+            if (TryGetComponent(out GlobalPlayerManager playerManager))
+                playerManager.TriggerCache();
+
             SpawnPlayerSession(sandbox.LocalPlayer);
             SpawnPlayerCharacter(sandbox.LocalPlayer);
         }
