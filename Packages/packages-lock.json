@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.karrar.netick": {
+      "version": "https://github.com/karrarrahim/NetickForUnity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.mono-cecil": "1.11.4"
+      },
+      "hash": "3175f9c7caff3d80f3f1527c188c5cf2d148ccfc"
+    },
     "com.stinkysteak.netick-timer": {
       "version": "https://github.com/StinkySteak/netick-ticktimer.git",
       "depth": 0,
