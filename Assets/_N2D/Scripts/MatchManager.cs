@@ -40,9 +40,9 @@ namespace StinkySteak.N2D.Launcher.Prototype
         {
             NetworkObject obj = Sandbox.NetworkInstantiate(_playerSessionPrefab.gameObject, Vector3.zero, Quaternion.identity, networkPlayer);
 
-            if(obj.TryGetComponent(out PlayerSession session))
+            if (obj.TryGetComponent(out PlayerSession session))
             {
-                session.SetNickname($"Player_{Random.Range(1000,9999)}");
+                session.SetNickname($"Player_{Random.Range(1000, 9999)}");
             }
         }
 
