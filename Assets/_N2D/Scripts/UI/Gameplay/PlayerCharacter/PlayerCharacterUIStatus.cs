@@ -32,7 +32,10 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.UI
                 _textNametag.SetText(session.Nickname);
                 _session = session;
                 _session.OnNicknameChanged += OnNicknameChanged;
+                return;
             }
+
+            Debug.LogError($"[{nameof(PlayerCharacterUIStatus)}]: No Player Session found for this player! inputSourceId: {Entity.InputSourcePlayerId}", this);
         }
 
         private void OnNicknameChanged()
