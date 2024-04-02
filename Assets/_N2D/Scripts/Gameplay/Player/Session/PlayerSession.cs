@@ -7,6 +7,7 @@ using System;
 
 namespace StinkySteak.N2D.Gameplay.Player.Session
 {
+    [ExecutionOrder(-100)]
     public class PlayerSession : NetworkBehaviour
     {
         [Networked] private NetworkString32 _nickname { get; set; }

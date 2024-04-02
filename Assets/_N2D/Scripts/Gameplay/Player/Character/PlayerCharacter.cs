@@ -1,9 +1,11 @@
+using Netick;
 using Netick.Unity;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character
 {
+    [ExecutionOrder(-99)]
     public class PlayerCharacter : NetickBehaviour
     {
         public int InputSourcePlayerId => Entity.InputSourcePlayerId;
