@@ -223,5 +223,9 @@ Enable Lag Compensation in Netick Config
 #### 4. (Optional) Disable Server-auth LagComp
 The Weapon is designed for server auth only, to disable that and allowing clients to predict bullets, remove the `IsServer` check on `ProcessShooting()`
 
+## ToDo
+- More advanced animations
+- Documentation on `[ExecutionOrder]` to solve `PlayerSession` & `PlayerCharacter` `NetworkStart()` racing
+
 ## Credits
 - Dungeon Platformer Tile Set (https://incolgames.itch.io/dungeon-platformer-tile-set-pixel-art?download)
