@@ -16,12 +16,15 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
         [Networked] private bool _isGrounded { get; set; }
         [Networked] private int _jumpCount { get; set; }
         [Networked] private bool _jumpButtonPressed { get; set; }
+        [Networked] private bool _isWalking { get; set; }
 
         private TickTimer _timerDoubleJumpDelay;
 
         [SerializeField] private Transform _groundChecker;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private float _groundCheckOverlapRadius = 0.1f;
+
+        public bool IsWalking => _isWalking;
 
         public override void NetworkFixedUpdate()
         {
@@ -53,7 +56,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
                     _jumpCount--;
                 }
 
-
+                _isWalking = Mathf.Abs(velocity.x) > 0.1f;
                 transform.Translate(velocity);
                 _jumpButtonPressed = input.Jump;
             }

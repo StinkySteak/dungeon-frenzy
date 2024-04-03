@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 3541287404522835111}
   - component: {fileID: 6290587020520711107}
   - component: {fileID: 5794989081546542482}
-  - component: {fileID: 6185028089922345995}
+  - component: {fileID: 9011296098682904991}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -159,6 +159,7 @@ MonoBehaviour:
   <_isGrounded>k__BackingField: 0
   <_jumpCount>k__BackingField: 0
   <_jumpButtonPressed>k__BackingField: 0
+  <_isWalking>k__BackingField: 0
   _groundChecker: {fileID: 562513142}
   _groundLayer:
     serializedVersion: 2
@@ -264,7 +265,7 @@ MonoBehaviour:
   _weapon: {fileID: -187163571796443866}
   _healthbar: {fileID: 508160093412112954}
   _ammobar: {fileID: 3451981288234977910}
---- !u!114 &6185028089922345995
+--- !u!114 &9011296098682904991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,9 +274,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 462263736606742655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4406cfc67c0d04f80c1f90fcfde8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 15763fd852003c44ea2a2d2416b6bd0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movement: {fileID: 462263736606742653}
+  _animator: {fileID: 8311701512602498432}
   _spriteRenderer: {fileID: 462263737325219084}
   _weapon: {fileID: -187163571796443866}
 --- !u!1 &462263736857771813
@@ -400,7 +403,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1982171320, guid: aa5b4841c57633d49a9949dfa4d7f1f9, type: 3}
+  m_Sprite: {fileID: -1347569810, guid: aa5b4841c57633d49a9949dfa4d7f1f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -484,7 +487,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1777490392, guid: aa5b4841c57633d49a9949dfa4d7f1f9, type: 3}
+  m_Sprite: {fileID: -1982171320, guid: aa5b4841c57633d49a9949dfa4d7f1f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
