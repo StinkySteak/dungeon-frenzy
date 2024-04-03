@@ -243,6 +243,13 @@ Enable Lag Compensation in Netick Config
 #### 4. (Optional) Disable Server-auth LagComp
 The Weapon is designed for server auth only, to disable that and allowing clients to predict bullets, remove the `IsServer` check on `ProcessShooting()`
 
+### Alternative to Lag Compensation
+#### 1. Enable raycast prediction
+Raycast immediately without waiting for server, there is a `IsServer` check to disable prediction.
+
+#### 2. Client-side auth
+Using a RPC to deal damage to the players on hit
+
 ## To Do/Issues
 - Camera doesn't work propertly on Multisandbox (multipeer)
 
