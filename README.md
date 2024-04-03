@@ -8,11 +8,11 @@ The sample presents whether Netick is capable to create a fast action online 2D 
 
 | Version | Release Date |
 | :-------- | :------- 
-| 0.1.0 | 22/03/2024  |
+| 0.1.2 | 03/04/2024  |
 
 ## Technical Info
 - Unity: 2021.3.21f1
-- Netick 2 Beta 0.10.13
+- Netick 2 Beta 0.11.16
 - Platforms: PC (Windows)
 
 ## Highlights
@@ -22,6 +22,7 @@ The sample presents whether Netick is capable to create a fast action online 2D 
 - Custom Interpolation on Weapon rotation
 - Optional Lag Compensation scripts
 - Server-auth Raycast
+- Custom Execution Order
 
 ### Gameplay
 - Double Jump
@@ -166,7 +167,26 @@ In order to keep track the player's list (both `PlayerSession` and `PlayerCharac
 #### Drawback
 There is a drawback on this architecture. We register each player's on `Spawned()` callback to the manager. However there could a racing condition where the `PlayerCharacter` was trying to access It's `PlayerSession` on `Spawned()` eventhough the `PlayerSession` hasn't been registered to the `GlobalPlayerManager`.
 
-This is because Netick `Spawned()` execution order won't be the same for each peers (not deterministic). A Current solving technique for this is, on `OnSceneLoaded()` callback from `NetworkEventsListener`, we uses the `FindObjectOfTypes` API to register the player's object outside `Spawned()` callback. 
+~~This is because Netick `Spawned()` execution order won't be the same for each peers (not deterministic). A Current solving technique for this is, on `OnSceneLoaded()` callback from `NetworkEventsListener`, we uses the `FindObjectOfTypes` API to register the player's object outside `Spawned()` callback.~~ 
+
+This now is solved by using `[ExecutionOrder]` attribute, this lets us to customize the NetworkStart order from each network behaviour (Netick 2 Beta 0.11.16)
+
+```cs
+    //Will be executed first (lower is priority)
+    [ExecutionOrder(-100)]
+    public class PlayerSession : NetworkBehaviour
+    {
+
+    }
+```
+
+```cs
+    [ExecutionOrder(-99)]
+    public class PlayerCharacter : NetickBehaviour
+    {
+
+    }
+```
 
 It's good for you to know `OnSceneLoaded()` is called earlier than any network object `Spawned()`.
 
@@ -223,9 +243,8 @@ Enable Lag Compensation in Netick Config
 #### 4. (Optional) Disable Server-auth LagComp
 The Weapon is designed for server auth only, to disable that and allowing clients to predict bullets, remove the `IsServer` check on `ProcessShooting()`
 
-## ToDo
-- More advanced animations
-- Documentation on `[ExecutionOrder]` to solve `PlayerSession` & `PlayerCharacter` `NetworkStart()` racing
+## To Do/Issues
+- Camera doesn't work propertly on Multisandbox (multipeer)
 
 ## Credits
 - Dungeon Platformer Tile Set (https://incolgames.itch.io/dungeon-platformer-tile-set-pixel-art?download)
