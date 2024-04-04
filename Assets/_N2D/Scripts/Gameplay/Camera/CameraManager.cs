@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace StinkySteak.N2D.Gameplay.Cam.Manager
 {
-    public class CameraManager : MonoBehaviour, INetickSceneLoaded
+    public class CameraManager : NetickBehaviour, INetickSceneLoaded
     {
         [SerializeField] private CinemachineBrain _cinemachineBrain;
         [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
@@ -19,13 +19,28 @@ namespace StinkySteak.N2D.Gameplay.Cam.Manager
 
         public void OnSceneLoaded(NetworkSandbox sandbox)
         {
+            AttachBehaviour(sandbox);
+
             LocalPlayerManager localPlayerManager = sandbox.GetComponent<LocalPlayerManager>();
             localPlayerManager.OnCharacterSpawned += OnCharacterSpawned;
-            
+
             if (localPlayerManager.TryGetCharacter(out PlayerCharacter character))
             {
                 OnCharacterSpawned(character);
             }
         }
+        private void AttachBehaviour(NetworkSandbox sandbox)
+        {
+#if UNITY_EDITOR
+            sandbox.AttachBehaviour(this);
+#endif
+        }
+#if UNITY_EDITOR
+
+        public override void NetworkRender()
+        {
+            _cinemachineVirtualCamera.enabled = Sandbox.IsVisible;
+        }
+#endif
     }
 }
