@@ -20,7 +20,7 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
         public override void OnSceneLoaded(NetworkSandbox sandbox)
         {
-            List<INetickSceneLoaded> listeners = ObjectFinder.FindPreAlloc<INetickSceneLoaded>(sandbox.Scene);
+            List<INetickSceneLoaded> listeners = sandbox.FindObjectsOfType<INetickSceneLoaded>();
 
             foreach (INetickSceneLoaded listener in listeners)
                 listener.OnSceneLoaded(sandbox);
