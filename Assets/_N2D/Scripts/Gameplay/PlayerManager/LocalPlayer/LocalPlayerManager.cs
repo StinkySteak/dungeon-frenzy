@@ -27,7 +27,6 @@ namespace StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer
 
         public void CharacterSpawned(PlayerCharacter playerCharacter)
         {
-            print($"CharacterSpawned: {playerCharacter.InputSourcePlayerId}");
             _character = playerCharacter;
             OnCharacterSpawned?.Invoke(playerCharacter);
         }

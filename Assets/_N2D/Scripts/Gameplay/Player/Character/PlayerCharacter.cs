@@ -23,8 +23,6 @@ namespace StinkySteak.N2D.Gameplay.Player.Character
 
             if (!Object.IsInputSource) return;
 
-            Sandbox.Log($"[{nameof(PlayerCharacter)}] NetworkStart InputSourceId: {InputSourcePlayerId} isInputAuth: {Object.IsInputSource} Sandbox: {Sandbox.name}");
-
             if (Sandbox.TryGetComponent(out LocalPlayerManager localPlayerManager))
                 localPlayerManager.CharacterSpawned(this);
         }

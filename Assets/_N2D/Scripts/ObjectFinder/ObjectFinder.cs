@@ -53,6 +53,30 @@ namespace StinkySteak.N2D.Finder
             return interfaces;
         }
 
+        public static List<T> FindPreAlloc<T>(Scene scene)
+        {
+            _rootGameObjectsPreAlloc.Clear();
+
+            int interfaceListPreAlloc = 10;
+            int getComponentsListPreAlloc = 50;
+
+            List<T> interfaces = new List<T>(interfaceListPreAlloc);
+            List<T> getComponentInChildrens = new List<T>(getComponentsListPreAlloc);
+            scene.GetRootGameObjects(_rootGameObjectsPreAlloc);
+
+            foreach (var rootGameObject in _rootGameObjectsPreAlloc)
+            {
+                getComponentInChildrens.Clear();
+                rootGameObject.GetComponentsInChildren(getComponentInChildrens);
+                foreach (var childInterface in getComponentInChildrens)
+                {
+                    interfaces.Add(childInterface);
+                }
+            }
+
+            return interfaces;
+        }
+
         public static List<T> FindFast<T>()
         {
             int interfaceListPreAlloc = 10;

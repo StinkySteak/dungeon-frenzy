@@ -25,7 +25,6 @@ namespace StinkySteak.N2D.Gameplay.Cam.Manager
         public void OnSceneLoaded(NetworkSandbox sandbox)
         {
             _networkSandbox = sandbox;
-            sandbox.Log("Subscribing....");
 
             LocalPlayerManager localPlayerManager = sandbox.GetComponent<LocalPlayerManager>();
             localPlayerManager.OnCharacterSpawned += OnCharacterSpawned;
