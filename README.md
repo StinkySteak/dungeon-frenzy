@@ -250,8 +250,31 @@ Raycast immediately without waiting for server, there is a `IsServer` check to d
 #### 2. Client-side auth
 Using a RPC to deal damage to the players on hit
 
+### Cinemachine Sandboxing
+This project is compatible with Netick sandboxing. However, by default This doesn't really do well for Cinemachine. Disabling just the camera won't be enough, we also have to disable the `CinemachineVirtualCamera` component. This issue has been solved in `CameraManager`. This code is for editor only and can be a little expensive to running it everytime, because we only this feature only in editor
+```cs
+        public void OnSceneLoaded(NetworkSandbox sandbox)
+        {
+            AttachBehaviour(sandbox);
+            // ....
+        }
+        private void AttachBehaviour(NetworkSandbox sandbox)
+        {
+#if UNITY_EDITOR
+            sandbox.AttachBehaviour(this);
+#endif
+        }
+#if UNITY_EDITOR
+
+        public override void NetworkRender()
+        {
+            _cinemachineVirtualCamera.enabled = Sandbox.IsVisible;
+        }
+#endif
+```
+
 ## To Do/Issues
-- Camera doesn't work propertly on Multisandbox (multipeer)
+- Empty
 
 ## Credits
 - Dungeon Platformer Tile Set (https://incolgames.itch.io/dungeon-platformer-tile-set-pixel-art?download)
