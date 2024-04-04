@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.nuget.mono-cecil": "1.11.4"
       },
-      "hash": "c65886831ff7a360c473af080f9b38e8af426ea3"
+      "hash": "5ee5b2b7e6b183a970544cc824daee52b851b2c0"
     },
     "com.stinkysteak.netick-timer": {
       "version": "https://github.com/StinkySteak/netick-ticktimer.git",
