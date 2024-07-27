@@ -35,6 +35,14 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         public event Action OnLastProjectileHitChanged;
         public event Action OnAmmoChanged;
 
+        [SerializeField] private RaycastType _raycastType;
+
+        private enum RaycastType
+        {
+            UnityPhysX,
+            NetickLagComp
+        }
+
         public float MaxAmmo => _maxAmmo;
         public float Ammo => _ammo;
 
@@ -105,11 +113,11 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             return hit;
         }
-#if NETICK_LAGCOMP
         public bool ShootLagComp(Vector3 originPoint, Vector3 direction, out ShootingRaycastResult result)
         {
+#if NETICK_LAGCOMP
             bool isHit = Sandbox.Raycast2D(originPoint, direction, out LagCompHit2D hit, InputSource, _distance, _hitableLayer);
-            
+
             result = new ShootingRaycastResult()
             {
                 Point = hit.Point,
@@ -117,8 +125,11 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             };
 
             return isHit;
-        }
+#else
+            result = default;
+            return false;
 #endif
+        }
         private void ProcessShooting()
         {
             if (!FetchInput(out PlayerCharacterInput input)) return;
@@ -137,9 +148,17 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             Vector2 originPoint = GetWeaponOriginPoint(direction);
 
-            //Enable if you have LagComp (Netick Pro) otherwise use Unity default Raycast
-            //bool isHit = ShootLagComp(originPoint, direction, out ShootingRaycastResult hitResult);
-            bool isHit = ShootUnity(originPoint, direction, out ShootingRaycastResult hitResult);
+            ShootingRaycastResult hitResult = default;
+            bool isHit = false;
+
+            if (_raycastType == RaycastType.UnityPhysX)
+            {
+                isHit = ShootUnity(originPoint, direction, out hitResult);
+            }
+            else if (_raycastType == RaycastType.NetickLagComp)
+            {
+                isHit = ShootLagComp(originPoint, direction, out hitResult);
+            }
 
             _timerAmmoReplenish = TickTimer.CreateFromSeconds(Sandbox, _ammoReplenishDelay);
             _ammo--;

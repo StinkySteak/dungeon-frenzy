@@ -189,6 +189,7 @@ MonoBehaviour:
   _maxAmmo: 20
   <Degree>k__BackingField: 0
   <_ammo>k__BackingField: 0
+  _raycastType: 0
 --- !u!114 &8071094478288072566
 MonoBehaviour:
   m_ObjectHideFlags: 0
