@@ -195,7 +195,7 @@ If you take a look at `GUIGameplay.cs` It implements `INetickSceneLoaded` interf
 
 Because of that, `GUIGameplay` now has the access of `NetworkSandbox` and may listen to the simulation. Another case for this is the `CameraManager`
 
-```
+```cs
 public class GUIGameplay : MonoBehaviour, INetickSceneLoaded
 {
     // ...
