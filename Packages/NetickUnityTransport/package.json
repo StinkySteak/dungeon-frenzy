@@ -1,0 +1,20 @@
+{
+  "name": "com.karrar.unitytransportnetick",
+  "version": "1.0.0",
+  "displayName": "UnityTransport for Netick",
+  "description": "A transport wrapper for UnityTransport.",
+  "unity": "2021.3",
+  "dependencies": {
+    "com.unity.transport": "2.2.1"
+  },
+  "keywords": [
+    "networking",
+    "multiplayer",
+    "online"
+  ],
+  "author": {
+    "name": "Karrar Rahim",
+    "email": "karsoftgames@gmail.com",
+    "url": "https://www.netick.net"
+  }
+}
