@@ -3,11 +3,13 @@ using Netick;
 using StinkySteak.N2D.Gameplay.PlayerInput;
 using UnityEngine;
 using StinkySteak.Netick.Timer;
+using StinkySteak.N2D.Gameplay.Player.Character.Dead;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
 {
     public class PlayerCharacterMovement : NetworkBehaviour
     {
+        [SerializeField] private PlayerCharacterDead _characterDead;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpForce;
@@ -28,6 +30,8 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
 
         public override void NetworkFixedUpdate()
         {
+            if (_characterDead.IsDead) return;
+
             _isGrounded = GetIsGrounded();
 
             if (_isGrounded)
