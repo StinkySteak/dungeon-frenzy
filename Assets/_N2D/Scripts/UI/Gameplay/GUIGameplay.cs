@@ -1,5 +1,6 @@
 using Netick.Unity;
 using StinkySteak.N2D.Gameplay.Player.Character;
+using StinkySteak.N2D.Gameplay.Player.Character.Dead;
 using StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer;
 using StinkySteak.N2D.Netick;
 using TMPro;
@@ -14,14 +15,15 @@ namespace StinkySteak.N2D.UI.Gameplay
         [SerializeField] private TMP_InputField _inputField;
         [SerializeField] private Button _buttonSetNickname;
         private NetworkSandbox _networkSandbox;
+        private PlayerCharacterDead _localPlayerDead;
+        private LocalPlayerManager _localPlayerManager;
 
         public void OnSceneLoaded(NetworkSandbox sandbox)
         {
             _networkSandbox = sandbox;
 
-            LocalPlayerManager localPlayerManager = _networkSandbox.GetComponent<LocalPlayerManager>();
-            localPlayerManager.OnCharacterSpawned += OnCharacterSpawned;
-            localPlayerManager.OnCharacterDespawned += OnCharacterDespawned;
+            _localPlayerManager = _networkSandbox.GetComponent<LocalPlayerManager>();
+            _localPlayerManager.OnCharacterSpawned += OnCharacterSpawned;
 
             _buttonSetNickname.onClick.AddListener(OnButtonSetNickname);
             _buttonRespawn.onClick.AddListener(OnButtonRespawn);
@@ -29,22 +31,25 @@ namespace StinkySteak.N2D.UI.Gameplay
 
         private void OnButtonSetNickname()
         {
-            _networkSandbox.GetComponent<LocalPlayerManager>().Session.RPC_SetNickname(_inputField.text);
+            _localPlayerManager.Session.RPC_SetNickname(_inputField.text);
         }
 
         private void OnButtonRespawn()
         {
-            _networkSandbox.GetComponent<LocalPlayerManager>().Session.RPC_Respawn();
-        }
-
-        private void OnCharacterDespawned()
-        {
-            _buttonRespawn.gameObject.SetActive(true);
+            _localPlayerManager.Session.RPC_Respawn();
         }
 
         private void OnCharacterSpawned(PlayerCharacter obj)
         {
+            _localPlayerDead = obj.CharacterDead;
+            _localPlayerDead.OnIsDeadChanged += OnLocalPlayerIsDead;
+
             _buttonRespawn.gameObject.SetActive(false);
+        }
+
+        private void OnLocalPlayerIsDead(bool isDead)
+        {
+            _buttonRespawn.gameObject.SetActive(isDead);
         }
     }
 }

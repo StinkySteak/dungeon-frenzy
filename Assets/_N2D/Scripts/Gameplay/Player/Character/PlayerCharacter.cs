@@ -1,7 +1,9 @@
 using Netick;
 using Netick.Unity;
+using StinkySteak.N2D.Gameplay.Player.Character.Dead;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using StinkySteak.N2D.Gameplay.PlayerManager.LocalPlayer;
+using UnityEngine;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character
 {
@@ -10,8 +12,11 @@ namespace StinkySteak.N2D.Gameplay.Player.Character
     {
         public int InputSourcePlayerId => Entity.InputSourcePlayerId;
 
+        [SerializeField] private PlayerCharacterDead _characterDead;
         private int _inputSourcePlayerId;
         private bool _isInputSource;
+
+        public PlayerCharacterDead CharacterDead => _characterDead;
 
         public override void NetworkStart()
         {

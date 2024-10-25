@@ -1,12 +1,15 @@
 using Netick.Unity;
 using Netick;
 using System;
+using UnityEngine;
+using StinkySteak.N2D.Gameplay.Player.Character.Dead;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Health
 {
     public class PlayerCharacterHealth : NetworkBehaviour
     {
         [Networked] private int _health { get; set; }
+        [SerializeField] private PlayerCharacterDead _characterDead; 
         public const int MAX_HEALTH = 100;
 
         public event Action OnHealthChanged;
@@ -16,7 +19,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health
 
         public override void NetworkStart()
         {
-            _health = MAX_HEALTH;
+            SetHealthToMax();
         }
 
         public void ReduceHealth(int amount)
@@ -25,8 +28,13 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health
 
             if (_health <= 0)
             {
-                Sandbox.Destroy(Object);
+                _characterDead.SetIsDead(true);
             }
+        }
+
+        public void SetHealthToMax()
+        {
+            _health = MAX_HEALTH;
         }
 
         [OnChanged(nameof(_health))]

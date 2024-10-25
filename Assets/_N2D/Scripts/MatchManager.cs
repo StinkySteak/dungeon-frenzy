@@ -1,7 +1,7 @@
 using Netick;
 using Netick.Unity;
-using StinkySteak.N2D.Finder;
 using StinkySteak.N2D.Gameplay.Player.Character;
+using StinkySteak.N2D.Gameplay.Player.Character.Dead;
 using StinkySteak.N2D.Gameplay.Player.Session;
 using StinkySteak.N2D.Gameplay.PlayerManager.Global;
 using StinkySteak.N2D.Gameplay.Spawnpoints;
@@ -17,6 +17,7 @@ namespace StinkySteak.N2D.Launcher.Prototype
         [SerializeField] private NetworkObject _playerSessionPrefab;
         [SerializeField] private NetworkObject _playerCharacterPrefab;
         private SpawnPoints _spawnpoints;
+        private GlobalPlayerManager _globalPlayerManager;
 
         public override void OnSceneLoaded(NetworkSandbox sandbox)
         {
@@ -27,7 +28,8 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
             if (!sandbox.IsServer) return;
 
-            _spawnpoints = FindObjectOfType<SpawnPoints>();
+            _spawnpoints = Sandbox.FindObjectOfType<SpawnPoints>();
+            _globalPlayerManager = Sandbox.GetComponent<GlobalPlayerManager>();
 
             SpawnPlayerSession(sandbox.LocalPlayer);
             SpawnPlayerCharacter(sandbox.LocalPlayer);
@@ -45,13 +47,28 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
         public void SpawnPlayerCharacter(NetworkPlayer player)
         {
-            bool isPlayerExist = Sandbox.GetComponent<GlobalPlayerManager>().IsCharacterExist(player.PlayerId);
+            bool isPlayerExist = _globalPlayerManager.IsCharacterExist(player.PlayerId);
 
             if (isPlayerExist) return;
 
             Vector3 nextPosition = _spawnpoints.GetNext().position;
 
             Sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, nextPosition, Quaternion.identity, player);
+        }
+
+        public void RespawnPlayerCharacter(NetworkPlayer player)
+        {
+            if (_globalPlayerManager.TryGetCharacter(player.PlayerId, out PlayerCharacter character))
+            {
+                PlayerCharacterDead characterDead = character.CharacterDead;
+
+                if (characterDead.IsAlive) return;
+
+                Vector3 nextPosition = _spawnpoints.GetNext().position;
+
+                characterDead.TeleportTo(nextPosition);
+                characterDead.SetRespawn();
+            }
         }
 
         public override void OnClientConnected(NetworkSandbox sandbox, NetworkConnection client)

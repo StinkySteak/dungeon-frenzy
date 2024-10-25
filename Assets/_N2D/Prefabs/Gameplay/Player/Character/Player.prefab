@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 6290587020520711107}
   - component: {fileID: 5794989081546542482}
   - component: {fileID: 9011296098682904991}
+  - component: {fileID: 7016034025283482265}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -117,6 +118,11 @@ MonoBehaviour:
   PositionPrecision: 3
   Settings: 31
   TransformSpace: 0
+  EnablePredictionErrorCorrectionSmoothing: 0
+  InterpolationMultiplier: 20
+  CorrectionMultiplier: 3
+  CorrectionMaxBlendAlpha: 0.7
+  TeleportErrorThreshold: 50
   _interpolationSource: 0
 --- !u!50 &462263736606742650
 Rigidbody2D:
@@ -151,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6a426c3fba5b24daf904606e6e7ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterDead: {fileID: 7016034025283482265}
   _rigidbody2D: {fileID: 462263736606742650}
   _moveSpeed: 5
   _jumpForce: 12
@@ -177,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac89be1b258697d4db3305c772b02af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterDead: {fileID: 7016034025283482265}
   _fireRate: 0.1
   _damage: 10
   _distance: 100
@@ -218,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925367ef763a23c42ac38f55726fee8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterDead: {fileID: 7016034025283482265}
 --- !u!114 &3541287404522835111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <_health>k__BackingField: 0
+  _characterDead: {fileID: 7016034025283482265}
 --- !u!114 &6290587020520711107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +292,27 @@ MonoBehaviour:
   _animator: {fileID: 8311701512602498432}
   _spriteRenderer: {fileID: 462263737325219084}
   _weapon: {fileID: -187163571796443866}
+--- !u!114 &7016034025283482265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462263736606742655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db8225177e95a34a9b9d04af1498e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 3541287404522835111}
+  _networkRigidbody: {fileID: 4467566168798759716}
+  _rigidbody: {fileID: 462263736606742650}
+  _collider: {fileID: 419371335777970531}
+  _renderers:
+  - {fileID: 462263737325219084}
+  - {fileID: 7694794156645874762}
+  _playerCanvas: {fileID: 4093771094497650232}
+  <_isDead>k__BackingField: 0
 --- !u!1 &462263736857771813
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,8 +577,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3081667175771740564}
   - component: {fileID: 4093771094497650232}
-  - component: {fileID: 8014162884403176804}
-  - component: {fileID: 9153718433786779925}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -598,46 +627,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &8014162884403176804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2360708870830032234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
---- !u!114 &9153718433786779925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2360708870830032234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &2372102981310341501
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7585997006757697511}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: StatusBars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1097,7 @@ GameObject:
   - component: {fileID: 622072219457179640}
   - component: {fileID: 3451981288234977910}
   m_Layer: 0
-  m_Name: Slider_1
+  m_Name: BarAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1154,13 +1143,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1174,7 +1163,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2008727989859487731}
   m_FillRect: {fileID: 9118116876856195145}
   m_HandleRect: {fileID: 0}
@@ -1495,7 +1484,7 @@ GameObject:
   - component: {fileID: 2348489482215143497}
   - component: {fileID: 508160093412112954}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: BarHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1541,13 +1530,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1561,7 +1550,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 491606738046051912}
   m_FillRect: {fileID: 8365851022824601922}
   m_HandleRect: {fileID: 0}

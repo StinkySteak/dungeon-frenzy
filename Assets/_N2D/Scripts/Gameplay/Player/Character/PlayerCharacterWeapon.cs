@@ -6,6 +6,7 @@ using StinkySteak.N2D.Gameplay.Player.Character.Health;
 using System;
 using StinkySteak.N2D.Gameplay.Bullet.Dataset;
 using StinkySteak.Netick.Timer;
+using StinkySteak.N2D.Gameplay.Player.Character.Dead;
 
 #if NETICK_LAGCOMP
 using Netick.Unity.Pro;
@@ -15,6 +16,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 {
     public class PlayerCharacterWeapon : NetworkBehaviour
     {
+        [SerializeField] private PlayerCharacterDead _characterDead;
         [SerializeField] private float _fireRate;
         [SerializeField] private int _damage;
         [SerializeField] private float _distance;
@@ -70,6 +72,8 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
         public override void NetworkFixedUpdate()
         {
+            if (_characterDead.IsDead) return;
+
             ProcessAim();
             ProcessShooting();
             ProcessAmmoReplenish();
