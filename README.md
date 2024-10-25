@@ -8,11 +8,11 @@ The sample presents whether Netick is capable to create a fast action online 2D 
 
 | Version | Release Date |
 | :-------- | :------- 
-| 0.1.2 | 03/04/2024  |
+| 0.1.3 | 25/10/2024  |
 
 ## Technical Info
 - Unity: 2021.3.21f1
-- Netick 2 Beta 0.11.16
+- Netick 2 Beta 0.12.45
 - Platforms: PC (Windows)
 
 ## Highlights
