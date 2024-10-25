@@ -54,7 +54,7 @@ namespace StinkySteak.N2D.Gameplay.Bullet.VFX
                 Sandbox.Instantiate(_bulletImpactVFX, transform.position, Quaternion.identity);
             }
 
-            Sandbox.DeattachBehaviour(this);
+            Sandbox.DetachBehaviour(this);
             Destroy(gameObject);
         }
     }
