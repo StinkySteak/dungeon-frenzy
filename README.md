@@ -147,7 +147,7 @@ We were unable to use the default interpolation from Netick for the weapon rotat
 #### Player Session vs Player Character
 There are multiple ways to manage players (keep track, spawning, despawn)
 
-A Player existence on the session is represented by `PlayerSession`, the object is not visible whatsoever, and It's purpose is to store about the player state e.g Nickname, Score, Player's team.
+A Player existence on the session is represented by `PlayerSession`, the object is not visible whatsoever, and It's purpose is to store about the player persistent state e.g Nickname, Score, Player's team.
 
 While the player we control was `PlayerCharacter` that has gameplay property such as health, position, weapons.
 
@@ -166,8 +166,6 @@ In order to keep track the player's list (both `PlayerSession` and `PlayerCharac
 
 #### Drawback
 There is a drawback on this architecture. We register each player's on `Spawned()` callback to the manager. However there could a racing condition where the `PlayerCharacter` was trying to access It's `PlayerSession` on `Spawned()` eventhough the `PlayerSession` hasn't been registered to the `GlobalPlayerManager`.
-
-~~This is because Netick `Spawned()` execution order won't be the same for each peers (not deterministic). A Current solving technique for this is, on `OnSceneLoaded()` callback from `NetworkEventsListener`, we uses the `FindObjectOfTypes` API to register the player's object outside `Spawned()` callback.~~ 
 
 This now is solved by using `[ExecutionOrder]` attribute, this lets us to customize the NetworkStart order from each network behaviour (Netick 2 Beta 0.11.16)
 
