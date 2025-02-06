@@ -30,6 +30,8 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
 
         public override void NetworkFixedUpdate()
         {
+            if (Object.IsProxy) return;
+
             if (_characterDead.IsDead) return;
 
             _isGrounded = GetIsGrounded();
