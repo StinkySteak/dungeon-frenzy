@@ -30,9 +30,6 @@ namespace StinkySteak.N2D.Launcher.Prototype
 
             _spawnpoints = Sandbox.FindObjectOfType<SpawnPoints>();
             _globalPlayerManager = Sandbox.GetComponent<GlobalPlayerManager>();
-
-            SpawnPlayerSession(sandbox.LocalPlayer);
-            SpawnPlayerCharacter(sandbox.LocalPlayer);
         }
 
         private void SpawnPlayerSession(NetworkPlayer networkPlayer)
@@ -71,30 +68,26 @@ namespace StinkySteak.N2D.Launcher.Prototype
             }
         }
 
-        public override void OnClientConnected(NetworkSandbox sandbox, NetworkConnection client)
+        public override void OnPlayerConnected(NetworkSandbox sandbox, NetworkPlayer player)
         {
-            SpawnPlayerSession(client);
-            SpawnPlayerCharacter(client);
+            SpawnPlayerSession(player);
+            SpawnPlayerCharacter(player);
         }
 
-        public override void OnClientDisconnected(NetworkSandbox sandbox, NetworkConnection client, TransportDisconnectReason transportDisconnectReason)
+        public override void OnPlayerDisconnected(NetworkSandbox sandbox, NetworkPlayer player, TransportDisconnectReason transportDisconnectReason)
         {
-            DespawnPlayerCharacter(client);
-            DespawnPlayerSession(client);
+            DespawnPlayerCharacter(player);
+            DespawnPlayerSession(player);
         }
 
         private void DespawnPlayerSession(NetworkPlayer networkConnection)
         {
-            GlobalPlayerManager playerManager = Sandbox.GetComponent<GlobalPlayerManager>();
-
-            if (playerManager.TryGetSession(networkConnection.PlayerId, out PlayerSession session))
+            if (_globalPlayerManager.TryGetSession(networkConnection.PlayerId, out PlayerSession session))
                 Sandbox.Destroy(session.Object);
         }
         private void DespawnPlayerCharacter(NetworkPlayer networkConnection)
         {
-            GlobalPlayerManager playerManager = Sandbox.GetComponent<GlobalPlayerManager>();
-
-            if (playerManager.TryGetCharacter(networkConnection.PlayerId, out PlayerCharacter character))
+            if (_globalPlayerManager.TryGetCharacter(networkConnection.PlayerId, out PlayerCharacter character))
                 Sandbox.Destroy(character.Object);
         }
     }
