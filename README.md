@@ -29,6 +29,24 @@ The sample presents whether Netick is capable to create a fast action online 2D 
 - Fast paced
 - Weapon Heat system
 
+### Projectile Spawning
+In Netick, we are using an efficient and accurate projectile vfx from a raycast design. Where it will store static data such as this.
+```cs
+public struct ProjectileHit
+{
+    public int Tick;
+    public Vector2 OriginPosition;
+    public Vector2 HitPosition;
+    public bool IsHitPlayer;
+}
+```
+
+Then, we will use the onChanged callback, however we do not want to spawn immediately. We want to spawn them on the next frame, why? When onChanged was called, it is using some old tick data, e.g when accessing `transform.position` as the bullet origin.
+
+**The Solution**
+- OnChanged -> Store the projectile data in queue
+- Render() callback -> dequeue then spawn the projectile
+
 ### Gameplay Simulation vs Visual
 
 Anything about simulation and visual is very recommended to be seperated. I Recommend this design, because it is good for your clean code & easier to manage if you plan to build a dedicated server (or headless server). You can disable the component entirely if its a headless server.
