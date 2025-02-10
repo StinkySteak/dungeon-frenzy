@@ -3,7 +3,6 @@ using Netick.Unity;
 using StinkySteak.N2D.Gameplay.Bullet.Dataset;
 using StinkySteak.N2D.Gameplay.Bullet.VFX;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 {
@@ -14,29 +13,40 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         [SerializeField] private SpriteRenderer _weaponRenderer;
         [SerializeField] private BulletTravelVFX _bulletVfxPrefab;
 
+        private ProjectileHit _queuedProjectile;
+
         public override void NetworkStart()
         {
-            _weapon.OnLastProjectileHitChanged += OnLastProjectileHitChanged;
+            _weapon.OnLastProjectileHitChanged += QueueProjectileForNextFrame;
         }
 
-        private void OnLastProjectileHitChanged()
+        private void QueueProjectileForNextFrame()
         {
-            ProjectileHit lastProjectileHit = _weapon.LastProjectileHit;
-            Vector2 originPossition = lastProjectileHit.OriginPosition;
-            Vector2 hitPosition = lastProjectileHit.HitPosition;
-            Vector2 bulletDirection = (hitPosition - originPossition).normalized;
-            bool isHitPlayer = lastProjectileHit.IsHitPlayer;
-
-            BulletTravelVFX bullet = Instantiate(_bulletVfxPrefab, originPossition, Quaternion.identity);
-            bullet.Initialize(Sandbox, hitPosition, bulletDirection, isHitPlayer);
-            
-            //TODO: Temporary multipeer compatibility
-            SceneManager.MoveGameObjectToScene(bullet.gameObject, Sandbox.Scene);
+            _queuedProjectile = _weapon.LastProjectileHit;
         }
 
         public override void NetworkRender()
         {
             UpdateWeaponRotationVisual();
+            DequeueProjectile();
+        }
+
+        private void DequeueProjectile()
+        {
+            bool isProjectileQueued = _queuedProjectile.IsValid;
+
+            if (!isProjectileQueued) return;
+
+            ProjectileHit lastProjectileHit = _queuedProjectile;
+            Vector2 originPossition = transform.position;
+            Vector2 hitPosition = lastProjectileHit.HitPosition;
+            Vector2 bulletDirection = (hitPosition - originPossition).normalized;
+            bool isHitPlayer = lastProjectileHit.IsHitPlayer;
+
+            BulletTravelVFX bullet = Sandbox.Instantiate(_bulletVfxPrefab, originPossition, Quaternion.identity);
+            bullet.Initialize(Sandbox, hitPosition, bulletDirection, isHitPlayer);
+
+            _queuedProjectile = ProjectileHit.None;
         }
 
         private void UpdateWeaponRotationVisual()
