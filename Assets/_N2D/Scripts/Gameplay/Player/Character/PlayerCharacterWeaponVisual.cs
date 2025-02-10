@@ -38,7 +38,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             if (!isProjectileQueued) return;
 
             ProjectileHit lastProjectileHit = _queuedProjectile;
-            Vector2 originPossition = transform.position;
+            Vector2 originPossition = _weapon.GetWeaponOriginPoint(transform.forward);
             Vector2 hitPosition = lastProjectileHit.HitPosition;
             Vector2 bulletDirection = (hitPosition - originPossition).normalized;
             bool isHitPlayer = lastProjectileHit.IsHitPlayer;

@@ -223,7 +223,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             return false;
         }
 
-        private Vector2 GetWeaponOriginPoint(Vector3 direction)
+        public Vector2 GetWeaponOriginPoint(Vector3 direction)
           => transform.position + (direction * _weaponOriginPointOffset);
 
         public Vector2 DegreesToDirection(float degrees)
