@@ -14,9 +14,11 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         [SerializeField] private BulletTravelVFX _bulletVfxPrefab;
 
         private ProjectileHit _queuedProjectile;
+        private Interpolator _weaponRotationInterpolator;
 
         public override void NetworkStart()
         {
+            _weaponRotationInterpolator = _weapon.FindInterpolator(nameof(_weapon.Degree));
             _weapon.OnLastProjectileHitChanged += QueueProjectileForNextFrame;
         }
 
@@ -51,11 +53,10 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
         private void UpdateWeaponRotationVisual()
         {
-            var interpolator = _weapon.FindInterpolator(nameof(_weapon.Degree));
-            bool didGetData = interpolator.GetInterpolationData(InterpolationSource.Auto, out float from, out float to, out float alpha);
+            bool didGetData = _weaponRotationInterpolator.GetInterpolationData(InterpolationSource.Auto, out float from, out float to, out float alpha);
 
             float interpolatedDegree;
-           
+
             if (didGetData)
                 interpolatedDegree = LerpDegree(from, to, alpha);
             else
