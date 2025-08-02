@@ -13,7 +13,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Dead
 
         [Space]
         [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private CircleCollider2D _collider;
+        [SerializeField] private BoxCollider2D _collider;
         [SerializeField] private SpriteRenderer[] _renderers;
         [SerializeField] private Canvas _playerCanvas;
 
