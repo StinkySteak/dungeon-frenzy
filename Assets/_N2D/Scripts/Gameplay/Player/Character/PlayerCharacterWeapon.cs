@@ -109,13 +109,19 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
         {
             RaycastHit2D hit = Physics2D.Raycast(originPoint, direction, _distance, _hitableLayer);
 
-            result = new ShootingRaycastResult()
+            if (hit)
             {
-                Point = hit.point,
-                HitObject = hit.collider.transform,
-            };
+                result = new ShootingRaycastResult()
+                {
+                    Point = hit.point,
+                    HitObject = hit.collider.transform
+                };
 
-            return hit;
+                return true;
+            }
+
+            result = default;
+            return false;
         }
         public bool ShootLagComp(Vector3 originPoint, Vector3 direction, out ShootingRaycastResult result)
         {
