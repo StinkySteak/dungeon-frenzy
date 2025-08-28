@@ -5,9 +5,10 @@
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.nuget.mono-cecil": "1.11.4"
+        "com.unity.nuget.mono-cecil": "1.11.4",
+        "com.unity.addressables": "1.22.3"
       },
-      "hash": "ce02b8faf99a497329b8844777d3cbbc5b1d9202"
+      "hash": "a3df1cb6b0b169262c83e3d330a740e2153afcbe"
     },
     "com.stinkysteak.netick-timer": {
       "version": "https://github.com/StinkySteak/netick-ticktimer.git",
