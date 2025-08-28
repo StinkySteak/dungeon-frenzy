@@ -45,7 +45,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
             Vector2 bulletDirection = (hitPosition - originPossition).normalized;
             bool isHitPlayer = lastProjectileHit.IsHitPlayer;
 
-            BulletTravelVFX bullet = Sandbox.Instantiate(_bulletVfxPrefab, originPossition, Quaternion.identity);
+            BulletTravelVFX bullet = Sandbox.LocalInstantiate(_bulletVfxPrefab, originPossition, Quaternion.identity);
             bullet.Initialize(Sandbox, hitPosition, bulletDirection, isHitPlayer);
 
             _queuedProjectile = ProjectileHit.None;

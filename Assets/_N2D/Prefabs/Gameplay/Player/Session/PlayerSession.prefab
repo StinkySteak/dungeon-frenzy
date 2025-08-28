@@ -45,18 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: -1923973434, guid: da78c2c9df60edc4fb5f65b59fa57c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _AoILayer: 0
   _BroadPhaseFilter: 0
-  _SpatialPrioritization: 0
   _NarrowPhaseFilter: 0
-  AddToNetworkLoop: 1
-  GlobalObjectIdHash: 0
-  SceneId: -1
-  _PrefabId: 2
+  _SpatialPrioritization: 0
+  _PredictionMode: 0
+  _AddToNetworkLoop: 1
+  _IsPersistent: 0
   PrefabRoot: {fileID: 0}
   Children: []
   PrefabIndex: -1
-  Persistent: 0
-  _predictionMode: 0
+  _PrefabId: 2
+  _SceneId: -1
+  _RuntimeSceneId: -1
 --- !u!114 &68535350912409234
 MonoBehaviour:
   m_ObjectHideFlags: 0

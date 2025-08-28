@@ -32,9 +32,10 @@ namespace StinkySteak.N2D.Launcher.Prototype
             _globalPlayerManager = Sandbox.GetComponent<GlobalPlayerManager>();
         }
 
-        private void SpawnPlayerSession(NetworkPlayer networkPlayer)
+        private void SpawnPlayerSession(NetworkPlayerId playerId)
         {
-            NetworkObject obj = Sandbox.NetworkInstantiate(_playerSessionPrefab.gameObject, Vector3.zero, Quaternion.identity, networkPlayer);
+            NetworkPlayer inputSource = Sandbox.GetPlayerById(playerId);
+            NetworkObject obj = Sandbox.NetworkInstantiate(_playerSessionPrefab.gameObject, Vector3.zero, Quaternion.identity, inputSource);
 
             if (obj.TryGetComponent(out PlayerSession session))
             {
@@ -42,15 +43,16 @@ namespace StinkySteak.N2D.Launcher.Prototype
             }
         }
 
-        public void SpawnPlayerCharacter(NetworkPlayer player)
+        public void SpawnPlayerCharacter(NetworkPlayerId playerId)
         {
-            bool isPlayerExist = _globalPlayerManager.IsCharacterExist(player.PlayerId);
+            bool isPlayerExist = _globalPlayerManager.IsCharacterExist(playerId);
 
             if (isPlayerExist) return;
 
             Vector3 nextPosition = _spawnpoints.GetNext().position;
 
-            Sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, nextPosition, Quaternion.identity, player);
+            NetworkPlayer inputSource = Sandbox.GetPlayerById(playerId);
+            Sandbox.NetworkInstantiate(_playerCharacterPrefab.gameObject, nextPosition, Quaternion.identity, inputSource);
         }
 
         public void RespawnPlayerCharacter(NetworkPlayer player)
@@ -68,26 +70,30 @@ namespace StinkySteak.N2D.Launcher.Prototype
             }
         }
 
-        public override void OnPlayerConnected(NetworkSandbox sandbox, NetworkPlayer player)
+        public override void OnPlayerJoined(NetworkSandbox sandbox, NetworkPlayerId player)
         {
+            if (!Sandbox.IsServer) return;
+
             SpawnPlayerSession(player);
             SpawnPlayerCharacter(player);
         }
 
-        public override void OnPlayerDisconnected(NetworkSandbox sandbox, NetworkPlayer player, TransportDisconnectReason transportDisconnectReason)
+        public override void OnPlayerLeft(NetworkSandbox sandbox, NetworkPlayerId player)
         {
+            if (!Sandbox.IsServer) return;
+
             DespawnPlayerCharacter(player);
             DespawnPlayerSession(player);
         }
 
-        private void DespawnPlayerSession(NetworkPlayer networkConnection)
+        private void DespawnPlayerSession(NetworkPlayerId playerId)
         {
-            if (_globalPlayerManager.TryGetSession(networkConnection.PlayerId, out PlayerSession session))
+            if (_globalPlayerManager.TryGetSession(playerId, out PlayerSession session))
                 Sandbox.Destroy(session.Object);
         }
-        private void DespawnPlayerCharacter(NetworkPlayer networkConnection)
+        private void DespawnPlayerCharacter(NetworkPlayerId playerId)
         {
-            if (_globalPlayerManager.TryGetCharacter(networkConnection.PlayerId, out PlayerCharacter character))
+            if (_globalPlayerManager.TryGetCharacter(playerId, out PlayerCharacter character))
                 Sandbox.Destroy(character.Object);
         }
     }

@@ -179,7 +179,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
                 _lastProjectileHit = new ProjectileHit()
                 {
-                    Tick = Sandbox.Tick.TickValue,
+                    Tick = Sandbox.Tick,
                     HitPosition = fakeHitPosition,
                     OriginPosition = originPoint,
                     IsHitPlayer = false,
@@ -198,7 +198,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Weapon
 
             _lastProjectileHit = new ProjectileHit()
             {
-                Tick = Sandbox.Tick.TickValue,
+                Tick = Sandbox.Tick,
                 HitPosition = hitResult.Point,
                 OriginPosition = originPoint,
                 IsHitPlayer = isHitPlayer,

@@ -51,7 +51,7 @@ namespace StinkySteak.N2D.Gameplay.Bullet.VFX
         {
             if (!_isHitPlayer)
             {
-                Sandbox.Instantiate(_bulletImpactVFX, transform.position, Quaternion.identity);
+                Sandbox.LocalInstantiate(_bulletImpactVFX, transform.position, Quaternion.identity);
             }
 
             Sandbox.DetachBehaviour(this);

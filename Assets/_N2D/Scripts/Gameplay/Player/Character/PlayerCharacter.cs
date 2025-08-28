@@ -10,10 +10,10 @@ namespace StinkySteak.N2D.Gameplay.Player.Character
     [ExecutionOrder(-99)]
     public class PlayerCharacter : NetickBehaviour
     {
-        public int InputSourcePlayerId => Entity.InputSourcePlayerId;
+        public NetworkPlayerId InputSourcePlayerId => Entity.InputSourcePlayerId;
 
         [SerializeField] private PlayerCharacterDead _characterDead;
-        private int _inputSourcePlayerId;
+        private NetworkPlayerId _inputSourcePlayerId;
         private bool _isInputSource;
 
         public PlayerCharacterDead CharacterDead => _characterDead;

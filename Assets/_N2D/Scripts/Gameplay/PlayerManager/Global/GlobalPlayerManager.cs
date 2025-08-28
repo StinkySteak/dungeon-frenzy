@@ -1,3 +1,4 @@
+using Netick;
 using StinkySteak.N2D.Gameplay.Player.Character;
 using StinkySteak.N2D.Gameplay.Player.Session;
 using System.Collections.Generic;
@@ -9,23 +10,23 @@ namespace StinkySteak.N2D.Gameplay.PlayerManager.Global
     {
         private const int DICT_CAPACITY = 8;
 
-        private Dictionary<int, PlayerSession> _playerSessions = new(DICT_CAPACITY);
-        private Dictionary<int, PlayerCharacter> _playerCharacters = new(DICT_CAPACITY);
-        public void AddPlayerSession(int playerId, PlayerSession playerSession)
+        private Dictionary<NetworkPlayerId, PlayerSession> _playerSessions = new(DICT_CAPACITY);
+        private Dictionary<NetworkPlayerId, PlayerCharacter> _playerCharacters = new(DICT_CAPACITY);
+        public void AddPlayerSession(NetworkPlayerId playerId, PlayerSession playerSession)
         {
             if (IsSessionExist(playerId)) return;
 
             _playerSessions.Add(playerId, playerSession);
         }
 
-        public void AddPlayerCharacter(int playerId, PlayerCharacter playerCharacter)
+        public void AddPlayerCharacter(NetworkPlayerId playerId, PlayerCharacter playerCharacter)
         {
             if (IsCharacterExist(playerId)) return;
 
             _playerCharacters.Add(playerId, playerCharacter);
         }
 
-        public void RemovePlayerCharacter(int playerId)
+        public void RemovePlayerCharacter(NetworkPlayerId playerId)
         {
             if (!IsCharacterExist(playerId)) return;
 
@@ -33,13 +34,13 @@ namespace StinkySteak.N2D.Gameplay.PlayerManager.Global
         }
 
 
-        public bool IsSessionExist(int playerId)
+        public bool IsSessionExist(NetworkPlayerId playerId)
             => _playerSessions.ContainsKey(playerId);
 
-        public bool IsCharacterExist(int playerId)
+        public bool IsCharacterExist(NetworkPlayerId playerId)
            => _playerCharacters.ContainsKey(playerId);
 
-        public bool TryGetCharacter(int playerId, out PlayerCharacter character)
+        public bool TryGetCharacter(NetworkPlayerId playerId, out PlayerCharacter character)
         {
             if (_playerCharacters.TryGetValue(playerId, out character))
             {
@@ -50,7 +51,7 @@ namespace StinkySteak.N2D.Gameplay.PlayerManager.Global
             return false;
         }
 
-        public bool TryGetSession(int playerId, out PlayerSession playerSession)
+        public bool TryGetSession(NetworkPlayerId playerId, out PlayerSession playerSession)
         {
             if (_playerSessions.TryGetValue(playerId, out playerSession))
             {

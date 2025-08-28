@@ -15,10 +15,10 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Movement
         [SerializeField] private float _jumpForce;
         [SerializeField] private float _doubleJumpForce;
         [SerializeField] private float _doubleJumpDelay = 0.2f;
-        [Networked] private bool _isGrounded { get; set; }
+        [Networked] private NetworkBool _isGrounded { get; set; }
         [Networked] private int _jumpCount { get; set; }
-        [Networked] private bool _jumpButtonPressed { get; set; }
-        [Networked] private bool _isWalking { get; set; }
+        [Networked] private NetworkBool _jumpButtonPressed { get; set; }
+        [Networked] private NetworkBool _isWalking { get; set; }
 
         private TickTimer _timerDoubleJumpDelay;
 

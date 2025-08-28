@@ -17,7 +17,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Dead
         [SerializeField] private SpriteRenderer[] _renderers;
         [SerializeField] private Canvas _playerCanvas;
 
-        [Networked] private bool _isDead { get; set; }
+        [Networked] private NetworkBool _isDead { get; set; }
 
         public bool IsDead => _isDead;
         public bool IsAlive => !_isDead;

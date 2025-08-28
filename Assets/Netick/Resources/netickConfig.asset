@@ -12,46 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 2061283162, guid: da78c2c9df60edc4fb5f65b59fa57c41, type: 3}
   m_Name: netickConfig
   m_EditorClassIdentifier: 
-  Assemblies:
-  - Assembly-CSharp.dll
-  _Prefabs:
-  - Obj: {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
-    InstanceId: 23850
-    Name: Player
-    FileName: Assets/_N2D/Prefabs/Gameplay/Player/Character/Player.prefab
-    GO: {fileID: 462263736606742655, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
-    Id: 0
-  - Obj: {fileID: 68535350912409233, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
-    InstanceId: 19868
-    Name: PlayerSession
-    FileName: Assets/_N2D/Prefabs/Gameplay/Player/Session/PlayerSession.prefab
-    GO: {fileID: 68535350912409235, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
-    Id: 1
+  Prefabs:
+  - {fileID: 462263736606742652, guid: 55f0b1aa9556a4f43b7f88a7451f34cd, type: 3}
+  - {fileID: 68535350912409233, guid: 65efd385498aa4347b106615a6c8e875, type: 3}
+  AutoGetPrefabs: 1
+  PrefabsPath: Assets/
   TickRate: 45
+  MaxAllowedTimestep: 0.2
   MaxPlayers: 6
   MaxObjects: 512
   MaxSendableDataSize: 50000
-  AllocatorStateBlockSize: 131072
-  AllocatorMetaBlockSize: 1048576
-  ReceiveBufferSize: 32768
-  SendBufferSize: 16384
-  Timeout: 10
+  StateAllocatorBlockSize: 131072
+  MetaAllocatorBlockSize: 1048576
+  AggressivePreAllocation: 0
   MaxPredictedTicks: 64
   ServerDivisor: 1
-  ClientDivisor: 1
-  PredictedClientPhysics: 1
+  PhysicsPrediction: 1
   PhysicsType: 2
   InvokeRenderInHeadless: 1
+  InvokeUpdate: 1
   RenderInvokeOrder: 1
+  MaxAdditiveScenes: 4
+  InputReuseAtLowFPS: 1
+  ExtraInterpolationDelay: 0
+  AccurateLocalInterpolation: 0
+  EnableMultithreading: 0
   EnableLogging: 1
-  SimServerLoss: 0
-  SimClientLoss: 0
+  EnableProfiling: 0
   EnableLagCompensation: 0
   EnableInterestManagement: 0
-  InterestGroupCount: 2
-  SimulationCulling: 0
-  CellSize: 450
+  EnableNarrowphaseFiltering: 0
+  CustomGroupCount: 2
+  AoILayerCount: 1
   WorldSize: {x: 8000, y: 1, z: 8000}
+  FastSerialization: 1
+  SyncTransformOnSpawn: 1
+  IncludeInactiveObjects: 0
+  AoILayer0CellSize: 450
+  AoILayer1CellSize: 750
+  AoILayer2CellSize: 750
+  AoILayer3CellSize: 750
+  AoILayer4CellSize: 750
   RenderWorldGrid: 0
-  UseSceneSwitchThread: 1
+  RenderedLayer: 0
   LagCompensationDebug: 1

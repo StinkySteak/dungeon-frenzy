@@ -34,7 +34,7 @@ namespace StinkySteak.N2D.Gameplay.Player.Character.Health.Visual
 
         private void OnDamaged()
         {
-            Sandbox.Instantiate(_vfxBloodPrefab, transform.position, Quaternion.identity);
+            Sandbox.LocalInstantiate(_vfxBloodPrefab, transform.position, Quaternion.identity);
 
             _renderer.material = _materialOnHit;
             _timerMaterialOnHitLifetime = AuthTickTimer.CreateFromSeconds(Sandbox, _materialOnHitLifetime);
